@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const wordModal = document.querySelector(".modal-word");
 	const descModal = document.querySelector(".modal-desc");
 	initBtns();
-	initTitleAnimate();
+	// initTitleAnimate();
 
 	// console.log(findDuplicateWord(WORDS))
 	// console.log(countWordsByLength(WORDS, 3))
