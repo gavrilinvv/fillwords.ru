@@ -11,6 +11,7 @@
 	<meta name="description" content="Находите слова в простой головоломке для всей семьи. Онлайн, бесплатно и без регистрации" />
 	<meta property="og:description" content="Находите слова в простой головоломке для всей семьи. Онлайн, бесплатно и без регистрации" />
 	<meta name="keywords" content="Филворды, бесплатная браузерная игра, головоломка, играть без регистрации, онлайн, найти слова, на поле" />
+	<meta name="yandex-verification" content="738fcd3e75cf5f96" />
 </head>
 <body>
 	<div id="app">

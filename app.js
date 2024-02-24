@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	// let schemeDegree = '1';
 
 	if (mobileCheck()) {
-		console.log('work!');
 		$("#not-support-screen").show();
 		$("#start-screen").hide();
 		return;
