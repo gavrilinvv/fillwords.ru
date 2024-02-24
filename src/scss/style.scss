@@ -326,7 +326,7 @@ body {
 	&-first {
 		clip-path: polygon(20px 0px, 100% 0px, 100% 100%, 0% 100%, 0% 20px);
 		transition: clip-path .5s;
-		cursor: help;
+		// cursor: help;
 	}
 }
 // .wow {

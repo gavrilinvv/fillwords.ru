@@ -327,31 +327,32 @@ document.addEventListener('DOMContentLoaded', () => {
 				let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
 				cell.classList.add('correct');
 				cell.style.backgroundColor = '#' + colorWord;
+				cell.setAttribute('data-word', word);
 
 				$(cell).velocity({scale: 1.1}, 200);
 				$(cell).velocity("reverse", { duration: 200 });
 
-				if (i === 0) {
-					cell.classList.add('correct-first');
-					cell.setAttribute('data-word', word);
-				}
-			})
-
-			// addXP(5);
-
-			// TODO. вынести в отдельную фукнцию
-			firstLetters = document.querySelectorAll(".correct-first");
-
-			firstLetters.forEach(firstLetter => {
-				firstLetter.addEventListener('click', () => {
-					let findWord = firstLetter.getAttribute('data-word');
+				cell.addEventListener('click', () => {
+					let findWord = cell.getAttribute('data-word');
 
 					wordModal.innerHTML = capitalizeFirstLetter(findWord);
 					descModal.innerHTML = WORDS.find(word => word.name === findWord).desc;
 
 					modalDesc.showModal();
 				})
+
+				if (i === 0) {
+					cell.classList.add('correct-first');
+				}
 			})
+
+			// addXP(5);
+
+			// TODO. вынести в отдельную фукнцию
+			// firstLetters = document.querySelectorAll(".correct-first");
+
+			// firstLetters.forEach(firstLetter => {
+			// })
 
 			setTimeout(() => {
 				checkWin()
