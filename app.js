@@ -308,11 +308,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function checkWord() {
-
-		// выбор цвета для слова
-		let colorWord = _getRandomFromArray(copyWordColors);
-		_removeItemFromArrayByValue(copyWordColors, colorWord);
-
 		let word = getWordByCoords(selectingWord);
 
 		if (selectingWord.length && (getWordByCoords(lastSelectedWord) === word)) {
@@ -321,10 +316,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		lastSelectedWord = selectingWord;
 
-		console.log(wordsInGame);
-		console.log(getWordByCoords(selectingWord));
 		// если слово собрано верно
 		if ( schemeInGame.some(scheme => equalsCheck(scheme, selectingWord)) ) {
+
+			// выбор цвета для слова
+			let colorWord = _getRandomFromArray(copyWordColors);
+			_removeItemFromArrayByValue(copyWordColors, colorWord);
+
 			selectingWord.forEach((coords, i) => {
 				let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
 				cell.classList.add('correct');
