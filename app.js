@@ -354,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			if (selectingWord.length > 1) {
 				inputedWord.classList.add('inputed-word-incorrect');
+				window.navigator.vibrate(200);
 				setTimeout(() => {
 					clearInputedWord();
 				}, 2000)
