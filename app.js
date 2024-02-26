@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 	const mainTitle = document.querySelector('.main-title');
+	const inputedWord = document.querySelector('.inputed-word');
 
 	const modalUnknownWord = document.getElementById("modal-unkown-word");
 	const modalOtherPath = document.getElementById("modal-other-path");
@@ -128,11 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function initBtns() {
 		btnSettings.addEventListener('click', () => {
-			$("#settings-screen").velocity("fadeIn", { duration: 200, delay: 300, display: 'block' })
-			$("#start-screen").velocity("fadeOut", { duration: 200 })
-			$("#game-screen").velocity("fadeOut", { duration: 200 })
-			$("#about-screen").velocity("fadeOut", { duration: 200 })
-			$("#not-support-screen").velocity("fadeOut", { duration: 200 })
+			$("#settings-screen").show()
+			$("#start-screen").hide()
+			$("#game-screen").hide()
+			$("#about-screen").hide()
+			// $("#not-support-screen").velocity("fadeOut", { duration: 200 })
 		})
 		btnNextLevel.forEach(btn => {
 			btn.addEventListener('click', () => {
@@ -146,18 +147,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 		})
 		btnAbout.addEventListener('click', () => {
-			$("#about-screen").velocity("fadeIn", { duration: 200, delay: 300, display: 'block' })
-			$("#start-screen").velocity("fadeOut", { duration: 200 })
-			$("#game-screen").velocity("fadeOut", { duration: 200 })
-			$("#settings-screen").velocity("fadeOut", { duration: 200 })
-			$("#not-support-screen").velocity("fadeOut", { duration: 200 })
+			$("#about-screen").show()
+			$("#start-screen").hide()
+			$("#game-screen").hide()
+			$("#settings-screen").hide()
+			// $("#not-support-screen").velocity("fadeOut", { duration: 200 })
 		})
 		btnPlay.forEach(btn => {
 			btn.addEventListener('click', () => {
-				$("#settings-screen").velocity("fadeOut", { duration: 200 })
-				$("#about-screen").velocity("fadeOut", { duration: 200 })
-				$("#game-screen").velocity("fadeIn", { duration: 200, delay: 300, display: 'block' })
-				$("#not-support-screen").velocity("fadeOut", { duration: 200 })
+				$("#settings-screen").hide()
+				$("#about-screen").hide()
+				$("#game-screen").show()
+				// $("#not-support-screen").velocity("fadeOut", { duration: 200 })
 
 				gridSize = btn.getAttribute('data-grid');
 
@@ -171,11 +172,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 		btnBack.forEach(btn => {
 			btn.addEventListener('click', () => {
-				$("#start-screen").velocity("fadeIn", { duration: 200, delay: 300, display: 'block' })
-				$("#game-screen").velocity("fadeOut", { duration: 200 })
-				$("#about-screen").velocity("fadeOut", { duration: 200 })
-				$("#settings-screen").velocity("fadeOut", { duration: 200 })
-				$("#not-support-screen").velocity("fadeOut", { duration: 200 })
+				$("#start-screen").show()
+				$("#game-screen").hide()
+				$("#about-screen").hide()
+				$("#settings-screen").hide()
+				// $("#not-support-screen").velocity("fadeOut", { duration: 200 })
 			})
 		})
 	}
@@ -340,6 +341,13 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			})
 
+			if (selectingWord.length > 1) {
+				inputedWord.classList.add('inputed-word-correct');
+				setTimeout(() => {
+					clearInputedWord();
+				}, 2000)
+			}
+
 			// addXP(5);
 
 			// TODO. вынести в отдельную фукнцию
@@ -354,10 +362,25 @@ document.addEventListener('DOMContentLoaded', () => {
 		} else if (wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord))) {
 			lastSelectedWord = [];
 			modalOtherPath.showModal();
+		} else {
+
+			if (selectingWord.length > 1) {
+				inputedWord.classList.add('inputed-word-incorrect');
+				setTimeout(() => {
+					clearInputedWord();
+				}, 2000)
+			}
 		}
 
 		selectingWord = [];
 		lastSelectedWord = [];
+	}
+
+	function clearInputedWord() {
+		inputedWord.innerHTML = "";
+		inputedWord.classList.remove('inputed-word-active');
+		inputedWord.classList.remove('inputed-word-correct');
+		inputedWord.classList.remove('inputed-word-incorrect');
 	}
 
 	function capitalizeFirstLetter(str) {
@@ -436,6 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if ($(this).hasClass('selected') || $(this).hasClass('correct')) {
 				return;
 			}
+			clearInputedWord();
 			$(this).addClass('selected');
 
 			mouseIsDown = true;
@@ -497,6 +521,11 @@ document.addEventListener('DOMContentLoaded', () => {
 								lastCell.classList.remove('selected');
 								selectingWord.pop();
 								selectingPrevLetter = selectingWord[selectingWord.length - 1];
+							}
+
+							if (selectingWord.length > 1) {
+								inputedWord.classList.add('inputed-word-active');
+								inputedWord.innerHTML = getWordByCoords(selectingWord);
 							}
 						}
 

@@ -163,6 +163,7 @@ body {
 	display: flex;
     flex-direction: column;
     align-items: center;
+	position: relative;
 }
 
 #game-screen {
@@ -297,20 +298,12 @@ body {
 
 	&-back {
 		position: absolute;
+		@include fluid('padding-left', 18px, 8px);
+		@include fluid('padding-right', 18px, 8px);
 		@include fluid('left', 12px, 8px);
 		@include fluid('top', 12px, 56px);
 	}
-
-	&-settings {
-
-	}
 }
-
-// .levels-grid {
-// 	display: grid;
-//     grid-gap: 12px;
-//     grid-template-columns: 24px 24px 24px;
-// }
 
 .blocked {
 	background: #ccc;
@@ -346,6 +339,27 @@ body {
 
 .row {
 	display: flex;
+}
+
+.inputed-word {
+	position: absolute;
+	@include fluid('top', -60px);
+	@include fluid('font-size', 22px);
+	@include fluid('padding-top', 2px);
+	@include fluid('padding-bottom', 2px);
+	@include fluid('padding-right', 8px);
+	@include fluid('padding-left', 8px);
+	@include fluid('border-radius', 8px);
+
+	&-active {
+		background-color: #fff;
+	}
+	&-correct {
+		background-color: #7fe68b;
+	}
+	&-incorrect {
+		background-color: #e67f7f;
+	}
 }
 
 dialog[open] {

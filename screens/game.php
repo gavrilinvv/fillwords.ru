@@ -35,6 +35,7 @@
 		</dialog>
 
 		<div class="area-wrapper">
+			<div class="inputed-word"></div>
 			<div id="area"></div>
 			<div class="button js-next-level _mt-16 _hidden">Следующий&nbsp;уровень</div>
 		</div>

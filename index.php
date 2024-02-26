@@ -21,6 +21,11 @@
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 
+	<script src="/src/js/jquery.min.js"></script>
+	<script src="/src/js/velocity.min.js"></script>
+	<!-- <script src="/src/js/lazy-line-painter-2.0.3.min.js"></script> -->
+	<script src="/dest/script.js?<?=date('Hdmy')?>"></script>
+
 	<!-- Yandex.Metrika counter -->
 	<script type="text/javascript" >
 		(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -57,11 +62,6 @@
 		<?//include('screens/not-support-screen.php');?>
 		<div class="banner banner-right"></div>
 	</div>
-
-	<script src="/src/js/jquery.min.js"></script>
-	<script src="/src/js/velocity.min.js"></script>
-	<script src="/src/js/lazy-line-painter-2.0.3.min.js"></script>
-	<script src="/dest/script.js"></script>
 
 	<!-- <script>
 		function renderAds() {
