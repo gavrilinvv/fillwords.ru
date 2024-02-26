@@ -298,7 +298,7 @@ body {
 	&-back {
 		position: absolute;
 		@include fluid('left', 12px, 8px);
-		@include fluid('top', 12px);
+		@include fluid('top', 12px, 48px);
 	}
 
 	&-settings {
