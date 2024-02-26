@@ -1,6 +1,6 @@
 <div id="game-screen">
 	<div class="container">
-		<div class="button button-back js-back">⬅️ Назад</div>
+		<div class="button button-back js-back"></div>
 		<!-- <div class="ui-xp">
 			<div id="ui-xp-circle"></div>
 			<div class="ui-xp-level">Уровень 1</div>

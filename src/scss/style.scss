@@ -298,10 +298,16 @@ body {
 
 	&-back {
 		position: absolute;
-		@include fluid('padding-left', 18px, 8px);
-		@include fluid('padding-right', 18px, 8px);
+		background-image: url('/src/img/home.webp');
+		background-repeat: no-repeat;
+		background-size: 70%;
+		background-position: center;
+		@include fluid('height', 24px);
+		@include fluid('width', 24px);
 		@include fluid('left', 12px, 8px);
 		@include fluid('top', 12px, 56px);
+		min-width: unset;
+		max-width: unset;
 	}
 }
 
