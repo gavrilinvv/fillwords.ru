@@ -351,8 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			lastSelectedWord = [];
 			modalOtherPath.showModal();
 		} else {
-
-			window.navigator.vibrate(200);
 			if (selectingWord.length > 1) {
 				inputedWord.classList.add('inputed-word-incorrect');
 				setTimeout(() => {
