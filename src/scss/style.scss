@@ -302,12 +302,13 @@ body {
 		background-repeat: no-repeat;
 		background-size: 70%;
 		background-position: center;
-		@include fluid('height', 24px);
-		@include fluid('width', 24px);
+		@include fluid('height', 48px);
+		@include fluid('width', 48px);
 		@include fluid('left', 12px, 8px);
 		@include fluid('top', 12px, 56px);
 		min-width: unset;
 		max-width: unset;
+		box-sizing: border-box;
 	}
 }
 
