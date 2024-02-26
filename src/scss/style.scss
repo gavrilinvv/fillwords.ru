@@ -282,8 +282,8 @@ body {
 	transition: .2s;
 
 	&:hover {
-		background: #e4e4e4;
-		transition: .2s;
+		background-color: #e4e4e4;
+		transition: background-color .2s;
 	}
 
 	&-level {
