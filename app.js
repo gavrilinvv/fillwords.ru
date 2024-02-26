@@ -19,11 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	let copyWordColors;
 	// let schemeDegree = '1';
 
-	if (mobileCheck()) {
-		$("#not-support-screen").show();
-		$("#start-screen").hide();
-		return;
-	}
+	// if (mobileCheck()) {
+	// 	$("#not-support-screen").show();
+	// 	$("#start-screen").hide();
+	// 	return;
+	// }
 
 	// TODO
 	// Запрет на использование слов повторно
@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const modalOtherPath = document.getElementById("modal-other-path");
 	const modalWin = document.getElementById("modal-win");
 	const modalDesc = document.getElementById("modal-word-desc");
-	// modalUnknownWord.showModal();
 
 	const btnSettings = document.querySelector(".js-settings");
 	const btnAbout = document.querySelector(".js-about");
@@ -49,12 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	initBtns();
 	// initTitleAnimate();
 
-	// console.log(findDuplicateWord(WORDS))
-	// console.log(countWordsByLength(WORDS, 3))
-	// console.log(countWordsByLength(WORDS, 4))
-	// console.log(countWordsByLength(WORDS, 5))
-	// console.log(countWordsByLength(WORDS, 6))
-	// console.log(countWordsByLength(WORDS, 7))
 
 	// function findDuplicateWord(words) {
 	// 	return words.filter((item, index) => words.indexOf(item) != index)
@@ -326,6 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			selectingWord.forEach((coords, i) => {
 				let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
 				cell.classList.add('correct');
+				cell.classList.remove('selected');
 				cell.style.backgroundColor = '#' + colorWord;
 				cell.setAttribute('data-word', word);
 
@@ -361,6 +355,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			lastSelectedWord = [];
 			modalOtherPath.showModal();
 		}
+
+		selectingWord = [];
+		lastSelectedWord = [];
 	}
 
 	function capitalizeFirstLetter(str) {
@@ -413,62 +410,111 @@ document.addEventListener('DOMContentLoaded', () => {
 		availabledCells.forEach(cell => cell.classList.remove('available'));
 	}
 
+	function eventCoords(e, minus) {
+		var coords = {
+			top: 0,
+			left: 0,
+			width: 0,
+			height: 0
+		};
+		var x = e.touches && e.touches.length ? e.touches[0].clientX : e.pageX;
+		var y = e.touches && e.touches.length ? e.touches[0].clientY : e.pageY;
+		coords.left = x;
+		coords.top = y;
+		if (minus) {
+			coords.top -= minus.top;
+			coords.left -= minus.left;
+		}
+		return coords;
+	}
+
 	function initEvents() {
-		let cells = document.querySelectorAll('#area .cell');
 		let mouseIsDown = false;
 		let isMoving = false;
 
-		cells.forEach(cell => {
-			cell.addEventListener('mousemove', () => {
-				if ((mouseIsDown && !isMoving) || (mouseIsDown && isMoving && cell.classList.contains('available')) || (mouseIsDown && isMoving && (cell.getAttribute('data-coords') === selectingPrevLetter))) {
-					if (cell.getAttribute('data-coords') !== selectingPrevLetter) {
-						removeAvailableCells();
-					}
+		$('#area .cell').on('mousedown touchstart', function(e) {
+			if ($(this).hasClass('selected') || $(this).hasClass('correct')) {
+				return;
+			}
+			$(this).addClass('selected');
 
-					if (cell.classList.contains('correct')) {
-						let lastCell = document.querySelector('.cell[data-coords="' + selectingWord[selectingWord.length - 1] + '"]');
-						if (!lastCell) return false;
-						lastCell.classList.add('available');
-						return false;
-					}
-					isMoving = true;
+			mouseIsDown = true;
+			selectingWord = [];
+			selectingWord.push($(this).attr('data-coords'));
 
-					let availableCells = getAvailableCells(cell.getAttribute('data-coords'));
-					availableCells.map(coords => {
-						let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
-						cell.classList.add('available')
-					});
-
-					cell.classList.add('selected');
-
-					if (!selectingWord.includes(cell.getAttribute('data-coords'))) {
-						selectingPrevLetter = selectingWord[selectingWord.length - 1];
-						selectingWord.push(cell.getAttribute('data-coords'));
-					}
-
-					if (selectingPrevLetter === cell.getAttribute('data-coords')) {
-						let lastCell = document.querySelector('.cell[data-coords="' + selectingWord[selectingWord.length - 1] + '"]');
-						lastCell.classList.remove('selected');
-						selectingWord.pop();
-						selectingPrevLetter = selectingWord[selectingWord.length - 1];
-					}
-				}
+			let availableCells = getAvailableCells($(this).attr('data-coords'));
+			availableCells.map(coords => {
+				let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
+				$(cell).addClass('available')
 			});
-			cell.addEventListener('mousedown', () => {
-				mouseIsDown = true;
-				selectingWord = [];
-			});
-			cell.addEventListener('mouseup', () => {
-				mouseIsDown = false;
-				isMoving = false;
-				checkWord();
 
-				selectingWord.forEach(coords => {
-					let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
-					cell.classList.remove('selected');
-				})
-				removeAvailableCells();
-			});
-		})
+			e.preventDefault();
+			return false;
+		});
+
+		$('#area').on('mousemove touchmove', function(e) {
+			if (!selectingWord.length) {
+				return;
+			}
+			var event_type = e.type;
+
+			if (event_type == 'mousemove' || event_type == 'touchmove') {
+				var touch_coords = eventCoords(e);
+				$('.cell.available').each(function() {
+					var offset = $(this).offset();
+					// !$(this).hasClass('selected') &&
+					if (((touch_coords.left >= offset.left && touch_coords.left <= (offset.left + $(this)[0].getBoundingClientRect().width)) && (touch_coords.top >= offset.top && touch_coords.top <= (offset.top + $(this)[0].getBoundingClientRect().height)))) {
+
+						if ((mouseIsDown && !isMoving) || (mouseIsDown && isMoving && $(this).hasClass('available')) || (mouseIsDown && isMoving && ($(this).attr('data-coords') === selectingPrevLetter))) {
+
+							if ($(this).attr('data-coords') !== selectingPrevLetter) {
+								removeAvailableCells();
+							}
+
+							if ($(this).hasClass('correct')) {
+								let lastCell = document.querySelector('.cell[data-coords="' + selectingWord[selectingWord.length - 1] + '"]');
+								if (!lastCell) return false;
+								lastCell.classList.add('available');
+								return false;
+							}
+							$(this).addClass('selected');
+							isMoving = true;
+
+							let availableCells = getAvailableCells($(this).attr('data-coords'));
+							availableCells.map(coords => {
+								let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
+								$(cell).addClass('available')
+							});
+
+							if (!selectingWord.includes($(this).attr('data-coords'))) {
+								selectingPrevLetter = selectingWord[selectingWord.length - 1];
+								selectingWord.push($(this).attr('data-coords'));
+							}
+
+							// console.log(selectingPrevLetter, $(this).attr('data-coords'));
+							if (selectingPrevLetter === $(this).attr('data-coords')) {
+								let lastCell = document.querySelector('.cell[data-coords="' + selectingWord[selectingWord.length - 1] + '"]');
+								lastCell.classList.remove('selected');
+								selectingWord.pop();
+								selectingPrevLetter = selectingWord[selectingWord.length - 1];
+							}
+						}
+
+					}
+				});
+			}
+		});
+		$('#area .cell').on('mouseup touchend', function(e) {
+			mouseIsDown = false;
+			isMoving = false;
+
+			selectingWord.forEach(coords => {
+				let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
+				cell.classList.remove('selected');
+			})
+			removeAvailableCells();
+
+			checkWord();
+		});
 	}
 })
