@@ -1,14 +1,12 @@
 import "/src/scss/style.scss";
 import { WORDS } from "/src/js/words";
 import { SCHEME } from "/src/js/scheme";
-import ProgressBar from "/src/js/progressbar.min.js";
-// import $ from "/src/js/jquery.min";
+// import ProgressBar from "/src/js/progressbar.min.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 	let area = document.getElementById('area');
 	let selectingWord = [];
 	let selectingPrevLetter = [];
-	let selectingPrevCell;
 	let lastSelectedWord = [];
 	let wordsInGame = [];
 	let schemeInGame = '';
@@ -17,13 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	// let xp = 0;
 	let bar;
 	let copyWordColors;
-	// let schemeDegree = '1';
 
 	// TODO
 	// Запрет на использование слов повторно
 	// Запрет на выделение ячеек через ячейку с найденным словом
-	let firstLetters;
-
 
 	const mainTitle = document.querySelector('.main-title');
 	const inputedWord = document.querySelector('.inputed-word');
@@ -42,14 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const descModal = document.querySelector(".modal-desc");
 	initBtns();
 	// initTitleAnimate();
-
-
-	// function findDuplicateWord(words) {
-	// 	return words.filter((item, index) => words.indexOf(item) != index)
-	// }
-	// function countWordsByLength(words, length) {
-	// 	return words.filter(item => item.length === length).length
-	// }
 
 	function resetGame() {
 		copyWordColors = [...wordColors];
@@ -71,45 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	function initTitleAnimate() {
-		mainTitle.innerHTML = mainTitle.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-		anime.timeline({loop: false})
-		.add({
-			targets: '.main-title .letter',
-			scale: [4,1],
-			opacity: [0,1],
-			translateZ: 0,
-			easing: "easeOutExpo",
-			duration: 950,
-			delay: (el, i) => 70*i
-		})
-	}
-
-	function initXPBar() {
-		document.querySelector("#ui-xp-circle").innerHTML = '';
-		bar = new ProgressBar.Circle(document.querySelector("#ui-xp-circle"), {
-			color: '#000',
-			strokeWidth: 8,
-			trailWidth: 4,
-			easing: 'easeInOut',
-			duration: 1400,
-			text: {
-			autoStyleContainer: false
-			},
-			from: { color: '#71BC78', width: 8 },
-			to: { color: '#71BC78', width: 8 },
-			step: function(state, circle) {
-				circle.path.setAttribute('stroke', state.color);
-				circle.path.setAttribute('stroke-width', state.width);
-
-				var value = Math.round(circle.value() * 1000);
-				circle.setText(value);
-			}
-		});
-		addXP(0);
-	}
-
 	function addXP(val) {
 		xp = xp + val;
 		bar.animate(xp/1000);  // Number from 0.0 to 1.0
@@ -121,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			$("#start-screen").hide()
 			$("#game-screen").hide()
 			$("#about-screen").hide()
-			// $("#not-support-screen").velocity("fadeOut", { duration: 200 })
 		})
 		btnNextLevel.forEach(btn => {
 			btn.addEventListener('click', () => {
@@ -139,14 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			$("#start-screen").hide()
 			$("#game-screen").hide()
 			$("#settings-screen").hide()
-			// $("#not-support-screen").velocity("fadeOut", { duration: 200 })
 		})
 		btnPlay.forEach(btn => {
 			btn.addEventListener('click', () => {
 				$("#settings-screen").hide()
 				$("#about-screen").hide()
 				$("#game-screen").show()
-				// $("#not-support-screen").velocity("fadeOut", { duration: 200 })
 
 				gridSize = btn.getAttribute('data-grid');
 
@@ -164,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				$("#game-screen").hide()
 				$("#about-screen").hide()
 				$("#settings-screen").hide()
-				// $("#not-support-screen").velocity("fadeOut", { duration: 200 })
 			})
 		})
 	}
@@ -224,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function getWordByLength(length) {
-		// return _shuffle(WORDS.filter(word => !wordsInGame.includes(word))).find(word => word.length === length);
 		return _shuffle(WORDS.filter(word => !wordsInGame.some(wordInGame => wordInGame.name === word.name))).find(word => word.name.length === length);
 	}
 
@@ -337,12 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 
 			// addXP(5);
-
-			// TODO. вынести в отдельную фукнцию
-			// firstLetters = document.querySelectorAll(".correct-first");
-
-			// firstLetters.forEach(firstLetter => {
-			// })
 
 			setTimeout(() => {
 				checkWin()
@@ -502,7 +439,6 @@ document.addEventListener('DOMContentLoaded', () => {
 								selectingWord.push($(this).attr('data-coords'));
 							}
 
-							// console.log(selectingPrevLetter, $(this).attr('data-coords'));
 							if (selectingPrevLetter === $(this).attr('data-coords')) {
 								let lastCell = document.querySelector('.cell[data-coords="' + selectingWord[selectingWord.length - 1] + '"]');
 								lastCell.classList.remove('selected');
@@ -534,5 +470,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			checkWord();
 		});
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	function initTitleAnimate() {
+		mainTitle.innerHTML = mainTitle.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+		anime.timeline({loop: false})
+		.add({
+			targets: '.main-title .letter',
+			scale: [4,1],
+			opacity: [0,1],
+			translateZ: 0,
+			easing: "easeOutExpo",
+			duration: 950,
+			delay: (el, i) => 70*i
+		})
+	}
+
+	function initXPBar() {
+		document.querySelector("#ui-xp-circle").innerHTML = '';
+		bar = new ProgressBar.Circle(document.querySelector("#ui-xp-circle"), {
+			color: '#000',
+			strokeWidth: 8,
+			trailWidth: 4,
+			easing: 'easeInOut',
+			duration: 1400,
+			text: {
+			autoStyleContainer: false
+			},
+			from: { color: '#71BC78', width: 8 },
+			to: { color: '#71BC78', width: 8 },
+			step: function(state, circle) {
+				circle.path.setAttribute('stroke', state.color);
+				circle.path.setAttribute('stroke-width', state.width);
+
+				var value = Math.round(circle.value() * 1000);
+				circle.setText(value);
+			}
+		});
+		addXP(0);
 	}
 })

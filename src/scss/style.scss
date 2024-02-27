@@ -351,7 +351,7 @@ body {
 .inputed-word {
 	position: absolute;
 	@include fluid('top', -60px);
-	@include fluid('font-size', 22px);
+	@include fluid('font-size', 28px);
 	@include fluid('padding-top', 2px);
 	@include fluid('padding-bottom', 2px);
 	@include fluid('padding-right', 8px);
