@@ -8,8 +8,8 @@
 	<meta property="og:title" content="Филворды | Браузерная игра"/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://fillwords.ru" />
-	<meta name="description" content="Находите слова в простой головоломке для всей семьи. Онлайн, бесплатно и без регистрации" />
-	<meta property="og:description" content="Находите слова в простой головоломке для всей семьи. Онлайн, бесплатно и без регистрации" />
+	<meta name="description" content="Филворды это простая головоломка для всей семьи, в которой надо искать слова на игровом поле. Онлайн, бесплатно и без регистрации" />
+	<meta property="og:description" content="Филворды это простая головоломка для всей семьи, в которой надо искать слова на игровом поле. Онлайн, бесплатно и без регистрации" />
 	<meta name="keywords" content="Филворды, бесплатная браузерная игра, головоломка, играть без регистрации, онлайн, найти слова, на поле" />
 	<meta name="yandex-verification" content="738fcd3e75cf5f96" />
 
