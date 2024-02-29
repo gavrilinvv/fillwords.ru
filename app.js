@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function fillGrid(scheme) {
+		console.log(scheme);
 		scheme.forEach(coords => {
 			let countLetters = coords.length;
 			wordsInGame.push(getWordByLength(countLetters));
