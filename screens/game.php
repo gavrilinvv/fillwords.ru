@@ -29,15 +29,15 @@
 
 		<dialog id="modal-win">Победа!
 			<form method="dialog">
-				<button class="js-next-level">Следующий уровень</button>
-				<button>Посмотреть поле</button>
+				<button class="js-next-level-modal">Следующий уровень</button>
+				<button class="js-show-field">Посмотреть поле</button>
 			</form>
 		</dialog>
 
 		<div class="area-wrapper">
 			<div class="inputed-word"></div>
 			<div id="area"></div>
-			<div class="button js-next-level _mt-16 _hidden">Следующий&nbsp;уровень</div>
+			<div class="button button-next-level js-next-level _mt-16 _hidden">Следующий&nbsp;уровень</div>
 		</div>
 	</div>
 </div>

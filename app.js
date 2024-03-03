@@ -33,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	const btnPlay = document.querySelectorAll(".js-play");
 	const btnBack = document.querySelectorAll(".js-back");
 	const btnNextLevel = document.querySelectorAll(".js-next-level");
+	const btnNextLevelModal = document.querySelectorAll(".js-next-level-modal");
+	const btnShowField = document.querySelectorAll(".js-show-field");
 	const wordModal = document.querySelector(".modal-word");
 	const descModal = document.querySelector(".modal-desc");
 	initBtns();
@@ -70,7 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			$("#game-screen").hide()
 			$("#about-screen").hide()
 		})
-		btnNextLevel.forEach(btn => {
+		console.log([...btnNextLevel]);
+		[...btnNextLevel].concat([...btnNextLevelModal]).forEach(btn => {
 			btn.addEventListener('click', () => {
 				resetGame();
 				createGrid(gridSize, gridSize);
@@ -79,6 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				initEvents();
 
 				btnNextLevel.forEach(btn => btn.classList.add('_hidden'))
+			})
+		})
+		btnShowField.forEach(btn => {
+			btn.addEventListener('click', () => {
+				btnNextLevel.forEach(btn => btn.classList.remove('_hidden'))
+				modalWin.close();
 			})
 		})
 		btnAbout.addEventListener('click', () => {
@@ -214,10 +223,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	function checkWin() {
 		let cells = document.querySelectorAll('.cell');
 		if (![...cells].filter(cell => !cell.classList.contains('correct')).length) {
+			btnNextLevelModal.forEach(btn => btn.classList.remove('_hidden'));
+			btnNextLevel.forEach(btn => btn.classList.add('_hidden'));
 			modalWin.showModal();
 			// addXP(10);
-
-			btnNextLevel.forEach(btn => btn.classList.remove('_hidden'))
 
 			return;
 		}
