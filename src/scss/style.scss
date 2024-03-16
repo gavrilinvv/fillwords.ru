@@ -148,6 +148,11 @@ body {
 		@include fluid('height', 60px, 42px);
 		@include fluid('font-size', 32px, 24px);
 	}
+	&-xs {
+		@include fluid('width', 48px, 36px);
+		@include fluid('height', 48px, 36px);
+		@include fluid('font-size', 32px, 24px);
+	}
 }
 .red {
 	background: red;

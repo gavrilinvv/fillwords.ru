@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let wordsInGame = [];
 	let schemeInGame = '';
 	let gridSize = 6;
-	let wordColors = ['7FB5B5', 'A18594', 'B39F7A', '3EB489', 'F9F8BB', 'FFC1CC', 'BADBAD', 'FFCF48'];
+	let wordColors = ['7FB5B5', 'A18594', 'B39F7A', '3EB489', 'F9F8BB', 'FFC1CC', 'BADBAD', 'FFCF48', 'CCCCFF', 'DAD871'];
 	// let xp = 0;
 	let bar;
 	let copyWordColors;
@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			case 3: className = 'cell-lg'; break;
 			case 4: className = 'cell-md'; break;
 			case 6: className = 'cell-sm'; break;
+			case 8: className = 'cell-xs'; break;
 		}
 		return className;
 	}
