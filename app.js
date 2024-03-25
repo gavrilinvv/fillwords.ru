@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let word = wordsInGame[i];
 
 			if (word) {
-				[...word.name].forEach((letter,j) => {
+				[...word.name].forEach((letter, j) => {
 					let cell = document.querySelector('.cell[data-coords="' + coords[j] + '"]');
 					cell.innerHTML = letter;
 				})
