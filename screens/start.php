@@ -9,6 +9,8 @@
 
 		<div class="button js-settings _mb-16">Играть</div>
 
-		<div class="button js-about">Об игре</div>
+		<div class="button js-about _mb-16">Об игре</div>
+
+		<div class="button js-to-other-games">Другие игры</div>
 	</div>
 </div>

@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const btnBack = document.querySelectorAll(".js-back");
 	const btnNextLevel = document.querySelectorAll(".js-next-level");
 	const btnNextLevelModal = document.querySelectorAll(".js-next-level-modal");
+	const btnOtherGames = document.querySelector(".js-to-other-games");
 	const btnShowField = document.querySelectorAll(".js-show-field");
 	const wordModal = document.querySelector(".modal-word");
 	const descModal = document.querySelector(".modal-desc");
@@ -71,8 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			$("#start-screen").hide()
 			$("#game-screen").hide()
 			$("#about-screen").hide()
-		})
-		console.log([...btnNextLevel]);
+			$("#other-games-screen").hide()
+		});
+
 		[...btnNextLevel].concat([...btnNextLevelModal]).forEach(btn => {
 			btn.addEventListener('click', () => {
 				resetGame();
@@ -84,6 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				btnNextLevel.forEach(btn => btn.classList.add('_hidden'))
 			})
 		})
+		btnOtherGames.addEventListener('click', () => {
+			$("#other-games-screen").show()
+			$("#start-screen").hide()
+			$("#game-screen").hide()
+			$("#settings-screen").hide()
+			$("#about-screen").hide()
+		})
+
 		btnShowField.forEach(btn => {
 			btn.addEventListener('click', () => {
 				btnNextLevel.forEach(btn => btn.classList.remove('_hidden'))
@@ -95,12 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			$("#start-screen").hide()
 			$("#game-screen").hide()
 			$("#settings-screen").hide()
+			$("#other-games-screen").hide()
 		})
 		btnPlay.forEach(btn => {
 			btn.addEventListener('click', () => {
 				$("#settings-screen").hide()
 				$("#about-screen").hide()
 				$("#game-screen").show()
+				$("#other-games-screen").hide()
 
 				gridSize = btn.getAttribute('data-grid');
 
@@ -118,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				$("#game-screen").hide()
 				$("#about-screen").hide()
 				$("#settings-screen").hide()
+				$("#other-games-screen").hide()
 			})
 		})
 	}

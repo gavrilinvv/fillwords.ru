@@ -186,6 +186,9 @@ body {
 #not-support-screen {
 	display: none;
 }
+#other-games-screen {
+	display: none;
+}
 
 .container {
 	// @include fluid('width', 1000px);
@@ -205,6 +208,9 @@ body {
 		@include fluid('padding-left', 16px);
 		@include fluid('padding-right', 16px);
 	}
+}
+._dflex {
+	display: flex;
 }
 ._dblock {
 	display: block;
@@ -279,8 +285,9 @@ body {
 	@include fluid('padding-left', 22px, 12px);
 	@include fluid('padding-right', 22px, 12px);
 	@include fluid('border-radius', 6px);
-	@include fluid('min-width', 132px);
+	@include fluid('min-width', 182px);
 	@include fluid('max-width', 350px, 280px);
+	text-decoration: none;
 	text-align: center;
 	cursor: pointer;
 	line-height: 1;

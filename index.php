@@ -59,6 +59,7 @@
 		<?//include('screens/levels.php');?>
 		<?include('screens/settings.php');?>
 		<?include('screens/game.php');?>
+		<?include('screens/other-games.php');?>
 		<?//include('screens/not-support-screen.php');?>
 		<div class="banner banner-right"></div>
 	</div>
