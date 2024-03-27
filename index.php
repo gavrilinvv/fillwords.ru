@@ -44,15 +44,17 @@
 	<noscript><div><img src="https://mc.yandex.ru/watch/96564571" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 	<!-- /Yandex.Metrika counter -->
 
-	<!-- Yandex.RTB -->
-	<!-- <script>window.yaContextCb=window.yaContextCb||[]</script>
-	<script src="https://yandex.ru/ads/system/context.js" async></script> -->
+	<!-- Yandex.RTB  -->
+	<script>window.yaContextCb=window.yaContextCb||[]</script>
+	<script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body>
 	<div id="app">
-		<div class="banner banner-bottom"></div>
+		<div class="banner banner-bottom">
+			<div id="yandex_rtb_R-A-7019864-3"></div>
+		</div>
 		<div class="banner banner-left">
-			<!-- <div id="yandex_rtb_R-A-6304157-1"></div> -->
+			<div id="yandex_rtb_R-A-7019864-1"></div>
 		</div>
 		<?include('screens/start.php');?>
 		<?include('screens/about.php');?>
@@ -61,16 +63,32 @@
 		<?include('screens/game.php');?>
 		<?include('screens/other-games.php');?>
 		<?//include('screens/not-support-screen.php');?>
-		<div class="banner banner-right"></div>
+		<div class="banner banner-right">
+			<div id="yandex_rtb_R-A-7019864-2"></div>
+		</div>
 	</div>
 
-	<!-- <script>
+	<script>
 		function renderAds() {
 			// left
 			window.yaContextCb.push(()=>{
 				Ya.Context.AdvManager.render({
-					"blockId": "R-A-6304157-1",
-					"renderTo": "yandex_rtb_R-A-6304157-1"
+					"blockId": "R-A-7019864-1",
+					"renderTo": "yandex_rtb_R-A-7019864-1"
+				})
+			})
+			// right
+			window.yaContextCb.push(()=>{
+				Ya.Context.AdvManager.render({
+					"blockId": "R-A-7019864-2",
+					"renderTo": "yandex_rtb_R-A-7019864-2"
+				})
+			})
+			// bottom
+			window.yaContextCb.push(()=>{
+				Ya.Context.AdvManager.render({
+					"blockId": "R-A-7019864-3",
+					"renderTo": "yandex_rtb_R-A-7019864-3"
 				})
 			})
 
@@ -79,6 +97,6 @@
 			}, 60000);
 		}
 		renderAds();
-	</script> -->
+	</script>
 </body>
 </html>
