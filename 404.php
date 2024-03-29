@@ -33,8 +33,6 @@
 			align-items: center;
 			flex-direction: column;
 		}
-
-
 		.not-found__wrapper {
 			color: #fff;
 			height: 100vh;
@@ -55,13 +53,17 @@
 			font-size: 42px;
 		}
 		.not-found__link {
-			font-size: 42px;
+			color: #fff;
+			/* text-decoration: none; */
+			font-size: 36px;
+			margin-top: 32px;
 		}
 	</style>
 	<div class="not-found__wrapper">
 		<div class="not-found">
 			<span class="not-found__code">404</span>
 			<span class="not-found__text">Страница не&nbsp;найдена</span>
+			<a href="/" class="not-found__link">На главную</a>
 		</div>
 	</div>
 </body>
