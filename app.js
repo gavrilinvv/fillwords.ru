@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const wordModal = document.querySelector(".modal-word");
 	const descModal = document.querySelector(".modal-desc");
 	initBtns();
-	// initTitleAnimate();
+	initTitleAnimate();
 
 	function resetGame() {
 		copyWordColors = [...wordColors];
@@ -511,18 +511,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 	function initTitleAnimate() {
-		mainTitle.innerHTML = mainTitle.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+		let titleWords = document.querySelectorAll('.logo__cell:not(.logo__cell-stable)');
+		let mainTitleWords = document.querySelectorAll('.logo__cell-stable');
+		$(titleWords).animate({opacity: 0}, 500, function() {
+			mainTitleWords.forEach(cell => {
+				cell.classList.add('logo__cell-zoomed');
+			})
+		});
 
-		anime.timeline({loop: false})
-		.add({
-			targets: '.main-title .letter',
-			scale: [4,1],
-			opacity: [0,1],
-			translateZ: 0,
-			easing: "easeOutExpo",
-			duration: 950,
-			delay: (el, i) => 70*i
-		})
+		// mainTitle.innerHTML = mainTitle.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+		// anime.timeline({loop: false})
+		// .add({
+		// 	targets: '.main-title .letter',
+		// 	scale: [4,1],
+		// 	opacity: [0,1],
+		// 	translateZ: 0,
+		// 	easing: "easeOutExpo",
+		// 	duration: 950,
+		// 	delay: (el, i) => 70*i
+		// })
 	}
 
 	function initXPBar() {

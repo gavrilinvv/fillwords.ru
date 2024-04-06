@@ -455,6 +455,41 @@ dialog[open] {
 	}
 }
 
+.logo {
+	&__container {
+		display: flex;
+		@include fluid('margin-bottom', 32px);
+		@include fluid('height', 222px);
+	}
+
+	&__cell {
+		@include fluid('font-size', 32px, 24px);
+		background-color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		@include fluid('height', 42px, 32px);
+		@include fluid('width', 42px, 32px);
+
+		@include fluid('margin-left', 2px);
+		@include fluid('margin-right', 2px);
+		@include fluid('margin-top', 2px);
+		@include fluid('margin-bottom', 2px);
+		@include fluid('border-radius', 6px);
+
+		&-hidden {
+			visibility: hidden;
+		}
+
+		&-zoomed {
+			@include fluid('font-size', 42px, 28px);
+			@include fluid('height', 64px, 36px);
+			@include fluid('width', 64px, 36px);
+			transition: .5s;
+		}
+	}
+}
+
 // @keyframes zoom {
 // 	0% {
 // 		background-size: 150%;
