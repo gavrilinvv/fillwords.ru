@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	function initTitleAnimate() {
 		let titleWords = document.querySelectorAll('.logo__cell:not(.logo__cell-stable)');
 		let mainTitleWords = document.querySelectorAll('.logo__cell-stable');
-		$(titleWords).animate({opacity: 0}, 500, function() {
+		$(titleWords).animate({opacity: 0}, 1000, function() {
 			mainTitleWords.forEach(cell => {
 				cell.classList.add('logo__cell-zoomed');
 			})
