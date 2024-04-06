@@ -88,7 +88,7 @@ body {
 }
 
 #app {
-	background: radial-gradient(circle at center, #242b49 0,#010207, #323c68 100%);
+	background: radial-gradient(circle at center, #000000 0, #242424, #000000 100%);
 	background-size: cover;
 	display: flex;
     justify-content: center;
@@ -96,7 +96,6 @@ body {
     height: 100svh;
 	position: relative;
     overflow: hidden;
-
 
 	background-size: 460%;
 	// animation: gradient 90s infinite;
@@ -266,7 +265,7 @@ body {
 	height: 50px;
 	width: 320px;
 	margin: 0 auto;
-	bottom: 10%;
+	bottom: 5%;
 
 	@include mobile {
 		position: absolute;

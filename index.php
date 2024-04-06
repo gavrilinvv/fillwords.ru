@@ -10,7 +10,7 @@
 	<meta property="og:url" content="https://fillwords.ru" />
 	<meta name="description" content="Филворды это простая головоломка для всей семьи, в которой надо искать слова на игровом поле. Онлайн, бесплатно и без регистрации" />
 	<meta property="og:description" content="Филворды это простая головоломка для всей семьи, в которой надо искать слова на игровом поле. Онлайн, бесплатно и без регистрации" />
-	<meta name="keywords" content="Филворды, бесплатная браузерная игра, головоломка, играть без регистрации, онлайн, найти слова, на поле" />
+	<meta name="keywords" content="Филворды, бесплатная браузерная игра, головоломка, играть без регистрации, онлайн, найти слова, на поле, поиск слов" />
 	<meta name="yandex-verification" content="738fcd3e75cf5f96" />
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
