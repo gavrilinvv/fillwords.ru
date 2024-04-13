@@ -1,4 +1,4 @@
-<div id="game-screen">
+<div id="game-screen" class="screen">
 	<div class="container">
 		<div class="button button-back js-back"></div>
 		<!-- <div class="ui-xp">

@@ -1,4 +1,4 @@
-<div id="levels-screen">
+<div id="levels-screen" class="screen">
 	<div class="container">
 		<div class="levels-grid">
 			<div class="js-play button button-level" data-level="1">1</div>

@@ -1,4 +1,4 @@
-<div id="settings-screen">
+<div id="settings-screen" class="screen">
 	<div class="container _flex-column">
 		<div class="button button-back js-back"></div>
 		<div class="text text-white _mb-16">Размер поля:</div>

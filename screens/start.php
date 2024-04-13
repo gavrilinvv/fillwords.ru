@@ -1,4 +1,4 @@
-<div id="start-screen">
+<div id="start-screen" class="screen">
 	<div class="container _flex-column">
 		<!-- <h1 class="main-title">Филворды</h1> -->
 

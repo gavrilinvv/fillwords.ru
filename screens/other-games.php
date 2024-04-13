@@ -1,4 +1,4 @@
-<div id="other-games-screen">
+<div id="other-games-screen" class="screen">
 	<div class="container">
 		<div class="button button-back js-back"></div>
 		<div class="_dflex _flex-column">

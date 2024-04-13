@@ -1,4 +1,4 @@
-<div id="about-screen">
+<div id="about-screen" class="screen">
 	<div class="container">
 		<div class="button button-back js-back"></div>
 		<div class="text text-white _inner-padding">

@@ -68,11 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function initBtns() {
 		btnSettings.addEventListener('click', () => {
-			$("#settings-screen").show()
-			$("#start-screen").hide()
-			$("#game-screen").hide()
-			$("#about-screen").hide()
-			$("#other-games-screen").hide()
+			showScreen('settings-screen');
 		});
 
 		[...btnNextLevel].concat([...btnNextLevelModal]).forEach(btn => {
@@ -87,11 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 		})
 		btnOtherGames.addEventListener('click', () => {
-			$("#other-games-screen").show()
-			$("#start-screen").hide()
-			$("#game-screen").hide()
-			$("#settings-screen").hide()
-			$("#about-screen").hide()
+			showScreen('other-games-screen');
 		})
 
 		btnShowField.forEach(btn => {
@@ -101,18 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 		})
 		btnAbout.addEventListener('click', () => {
-			$("#about-screen").show()
-			$("#start-screen").hide()
-			$("#game-screen").hide()
-			$("#settings-screen").hide()
-			$("#other-games-screen").hide()
+			showScreen('about-screen');
 		})
 		btnPlay.forEach(btn => {
 			btn.addEventListener('click', () => {
-				$("#settings-screen").hide()
-				$("#about-screen").hide()
-				$("#game-screen").show()
-				$("#other-games-screen").hide()
+				showScreen('game-screen');
 
 				gridSize = btn.getAttribute('data-grid');
 
@@ -126,13 +111,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 		btnBack.forEach(btn => {
 			btn.addEventListener('click', () => {
-				$("#start-screen").show()
-				$("#game-screen").hide()
-				$("#about-screen").hide()
-				$("#settings-screen").hide()
-				$("#other-games-screen").hide()
+				showScreen('start-screen');
 			})
 		})
+	}
+
+	function showScreen(screen) {
+		[...document.getElementsByClassName('screen')].forEach(screen => {
+			$(screen).hide();
+		})
+		$("#" + screen).show();
 	}
 
 	function _getRandomBoolean() {
@@ -264,6 +252,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			return;
 		}
 		lastSelectedWord = selectingWord;
+
+		// если нашел слово, которое есть в базе, но нет на поле
+		if ( WORDS.some(arrWord => arrWord.name === word) ) {
+			// alert('Слово ' + word + ' есть');
+			return;
+		}
 
 		// если слово собрано верно
 		if ( schemeInGame.some(scheme => equalsCheck(scheme, selectingWord)) ) {
@@ -495,14 +489,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			checkWord();
 		});
 	}
-
-
-
-
-
-
-
-
 
 
 
