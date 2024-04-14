@@ -254,10 +254,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		lastSelectedWord = selectingWord;
 
 		// если нашел слово, которое есть в базе, но нет на поле
-		if ( WORDS.some(arrWord => arrWord.name === word) ) {
-			// alert('Слово ' + word + ' есть');
-			return;
-		}
+		// if ( WORDS.some(arrWord => arrWord.name === word) ) {
+		// 	// alert('Слово ' + word + ' есть');
+		// 	return;
+		// }
 
 		// если слово собрано верно
 		if ( schemeInGame.some(scheme => equalsCheck(scheme, selectingWord)) ) {
