@@ -68,6 +68,7 @@
 		</div>
 	</div>
 
+	<script src="/src/js/mo.js"></script>
 	<script>
 		function renderAds() {
 			// left

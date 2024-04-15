@@ -244,6 +244,33 @@ document.addEventListener('DOMContentLoaded', () => {
 		return res.join('');
 	}
 
+	function _animateWord(cells) {
+		cells.forEach((cell, i) => {
+			const smoke = new mojs.Shape({
+				left: 0, top: 0,
+				stroke:   '#FF9C00',
+				strokeWidth: { [2*60] : 0 },
+				fill:       'none',
+				scale:      { 0: 1 },
+				radius:     60,
+				duration:   400,
+				easing:     'cubic.out',
+				onComplete() {
+					this.el.parentNode.removeChild(this.el);
+				}
+			});
+			setTimeout(() => {
+				smoke.tune(getCenterOfCell(cell)).replay();
+			}, 100*i)
+		})
+	}
+
+	// получение координаты центра ячейки
+	function getCenterOfCell(cell) {
+		const { left, top, width, height } = cell.getBoundingClientRect()
+		return {x: left + width / 2, y:top + height / 2}
+	}
+
 	function checkWord() {
 		let word = getWordByCoords(selectingWord);
 
@@ -292,6 +319,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			if (selectingWord.length > 1) {
 				inputedWord.classList.add('inputed-word-correct');
+				let wordCells = selectingWord.map(coords => document.querySelector('.cell[data-coords="' + coords + '"]'));
+				_animateWord(wordCells);
 				setTimeout(() => {
 					clearInputedWord();
 				}, 2000)
