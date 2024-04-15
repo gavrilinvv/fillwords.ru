@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			case 3: size = 60; break;
 			case 4: size = 50; break;
 			case 6: size = 40; break;
-			case 8: size = 20; break;
+			case 8: size = 30; break;
 		}
 		return size;
 	}
