@@ -244,15 +244,27 @@ document.addEventListener('DOMContentLoaded', () => {
 		return res.join('');
 	}
 
+	function getRadiusEffect(rows) {
+		let size;
+		switch(+rows) {
+			case 3: size = 60; break;
+			case 4: size = 50; break;
+			case 6: size = 40; break;
+			case 8: size = 40; break;
+		}
+		return size;
+	}
+
 	function _animateWord(cells) {
+		const RADIUS = getRadiusEffect(gridSize);
 		cells.forEach((cell, i) => {
 			const smoke = new mojs.Shape({
 				left: 0, top: 0,
 				stroke:   '#FF9C00',
-				strokeWidth: { [2*60] : 0 },
+				strokeWidth: { [2*RADIUS] : 0 },
 				fill:       'none',
 				scale:      { 0: 1 },
-				radius:     60,
+				radius:     RADIUS,
 				duration:   400,
 				easing:     'cubic.out',
 				onComplete() {
