@@ -21,9 +21,12 @@
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 	<script src="/src/js/jquery.min.js"></script>
 	<script src="/src/js/velocity.min.js"></script>
-	<!-- <script src="/src/js/lazy-line-painter-2.0.3.min.js"></script> -->
 	<script src="/dest/script.js?<?=date('Hdmy')?>"></script>
 
 	<!-- Yandex.Metrika counter -->
@@ -56,6 +59,7 @@
 		<div class="banner banner-left">
 			<div id="yandex_rtb_R-A-7019864-1"></div>
 		</div>
+		<?include('screens/dots.php');?>
 		<?include('screens/start.php');?>
 		<?include('screens/about.php');?>
 		<?//include('screens/levels.php');?>

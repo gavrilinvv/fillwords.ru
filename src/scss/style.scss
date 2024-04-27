@@ -80,7 +80,8 @@ $gap-size-mobile: 12px;
 }
 
 * {
-	font-family: sans-serif;
+	// font-family: sans-serif;
+	font-family: "Roboto Condensed", sans-serif;
 }
 body {
 	padding: 0;
@@ -88,8 +89,9 @@ body {
 }
 
 #app {
-	background: radial-gradient(circle at center, #000000 0, #242424, #000000 100%);
-	background-size: cover;
+	// background: radial-gradient(circle at center, #000000 0, #242424, #000000 100%);
+	background-image: url('/src/img/bg8_.jpg');
+    background-size: cover;
 	display: flex;
     justify-content: center;
     align-items: center;
@@ -97,7 +99,7 @@ body {
 	position: relative;
     overflow: hidden;
 
-	background-size: 460%;
+	// background-size: 460%;
 	// animation: gradient 90s infinite;
 }
 
@@ -122,7 +124,6 @@ body {
         -ms-user-select: none;
             user-select: none;
 	position: relative;
-	background-color: rgb(231, 231, 231);
 	@include fluid('border-radius', 4px);
 	display: flex;
 	justify-content: center;
@@ -130,7 +131,15 @@ body {
 	cursor: pointer;
 	@include fluid('margin', 2px);
 	transition: .6s;
-	clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 0% 100%, 0% 0px);
+	// clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 0% 100%, 0% 0px);
+
+	background: rgba(255, 255, 255, 0.4);
+	border-radius: 16px;
+	backdrop-filter: blur(2px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 -2px 0px 0px white, 0 0px 0 0 black;
+	color: white;
+	top: 0;
 
 	&-lg {
 		@include fluid('width', 80px, 60px);
@@ -153,24 +162,66 @@ body {
 		@include fluid('font-size', 32px, 24px);
 	}
 }
-.red {
-	background: red;
-}
-.blue {
-	background: blue;
-}
-.green {
-	background: green;
-}
+// .red {
+// 	background: red;
+// }
+// .blue {
+// 	background: blue;
+// }
+// .green {
+// 	background: green;
+// }
 
 .area {
 	position: relative;
-}
-.area-wrapper {
-	display: flex;
-    flex-direction: column;
-    align-items: center;
-	position: relative;
+
+	&-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		position: relative;
+	}
+
+	&-table {
+		position: absolute;
+		@include fluid('top', 10px);
+		@include fluid('width', 300px, 200px);
+		// @include fluid('height', 10px);
+		background: white;
+		height: auto;
+		@include fluid('padding-top', 8px);
+		@include fluid('padding-bottom', 8px);
+		@include fluid('padding-left', 8px);
+		@include fluid('padding-right', 8px);
+		@include fluid('border-radius', 4px);
+		cursor: pointer;
+		user-select: none;
+
+		&-opened {
+			& .area-table__content {
+				display: flex;
+			}
+		}
+
+		&__content {
+			display: none;
+			justify-content: space-between;
+		}
+
+		&__title {
+			@include fluid('font-size', 18px);
+			text-align: center;
+		}
+
+		&__word {
+			display: block;
+			text-decoration: line-through;
+		}
+	}
+
+	&__bonus-list {
+
+	}
 }
 
 #game-screen {
@@ -236,6 +287,26 @@ body {
 }
 ._mb-16 {
 	@include fluid('margin-bottom', 16px);
+}
+
+.score {
+	position: absolute;
+	color: white;
+	@include fluid('font-size', 36px);
+	@include fluid('right', 12px, 8px);
+	@include fluid('top', 12px, 56px);
+}
+
+.notice {
+	position: absolute;
+	top: 20%;
+	@include fluid('font-size', 42px);
+    color: white;
+	z-index: 3;
+
+	@include mobile {
+		top: 16%;
+	}
 }
 
 .banner {
@@ -337,9 +408,11 @@ body {
 	// transition: .2s;
 }
 .selected {
-	background: orange!important;
-	color: white;
-	transition: .2s;
+	background: rgba( 255, 143, 0, 0.3 )!important;
+	// box-shadow: inset 0 0 30px 0 orange;
+	// color: white;
+	top: 2px;
+	transition: .1s;
 }
 .correct {
 	// background: #b6e2b6!important;
@@ -365,12 +438,12 @@ body {
 .inputed-word {
 	position: absolute;
 	@include fluid('top', -60px);
-	@include fluid('font-size', 28px);
-	@include fluid('padding-top', 2px);
-	@include fluid('padding-bottom', 2px);
-	@include fluid('padding-right', 8px);
-	@include fluid('padding-left', 8px);
-	@include fluid('border-radius', 8px);
+	@include fluid('font-size', 32px);
+	@include fluid('padding-top', 4px);
+	@include fluid('padding-bottom', 4px);
+	@include fluid('padding-right', 12px);
+	@include fluid('padding-left', 12px);
+	@include fluid('border-radius', 6px);
 
 	&-active {
 		background-color: #fff;
@@ -520,6 +593,104 @@ dialog[open] {
 	}
 	100% {
 		@include fluid('background-position-y', -20px);
+	}
+}
+
+.bg-fluid {
+	z-index: 0;
+	overflow: hidden;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	.dotWrapper {
+		position: absolute;
+
+		@for $i from 1 through 75 {
+			&-#{$i} {
+				top: random(100) * 1%;
+				left: random(100) * 1%;
+				animation: flying (random(50)+20)+s ease-in-out math.div(random(100), -10)+s infinite alternate;
+			}
+		}
+	}
+
+	.dot {
+		// width: 12px;
+		// height: 12px;
+		filter: blur(1px);
+		background: rgba(255, 255, 255, 0.3);
+		border-radius: 50%;
+
+		@for $i from 1 through 50 {
+			$size: (random(60)-15);
+			&-#{$i} {
+				width: $size+px;
+				height: $size+px;
+				transform-origin: (random(30)-15)+px (random(30)-15)+px;
+				animation: rotating (random(20)+10)+s ease-in-out math.div(random(100), -10)+s infinite;
+			}
+		}
+
+		@include mobile {
+			background: rgba(255, 255, 255, 0.3);
+		}
+	}
+}
+
+@keyframes rotating {
+	0% {
+		opacity: 0;
+		transform: rotate(0deg);
+	}
+	25%, 75% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes flying {
+	0% {
+		transform: translate(0, 0);
+	}
+	10% {
+		transform: translate(20px, 50px);
+	}
+	20% {
+		transform: translate(-30px, 10px);
+	}
+	30% {
+		transform: translate(10px, 60px);
+	}
+	40% {
+		transform: translate(50px, 00px);
+	}
+	50% {
+		transform: translate(-10px, -40px);
+	}
+	60% {
+		transform: translate(-40px, 20px);
+	}
+	70% {
+		transform: translate(30px, -30px);
+	}
+	80% {
+		transform: translate(0px, -60px);
+	}
+	90% {
+		transform: translate(40px, 10px);
+	}
+	100% {
+		transform: translate(0, 0);
 	}
 }
 

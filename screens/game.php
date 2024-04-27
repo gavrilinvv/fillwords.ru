@@ -6,6 +6,9 @@
 			<div class="ui-xp-level">Уровень 1</div>
 		</div> -->
 
+		<div class="score">0</div>
+		<div class="notice"></div>
+
 		<dialog id="modal-unkown-word">Я не знаю такого слова
 			<form method="dialog">
 				<button>Понятно</button>
@@ -18,6 +21,11 @@
 			</form>
 		</dialog>
 
+		<dialog id="modal-found-bonus">Бонусное слово уже найдено
+			<form method="dialog">
+				<button>Понятно</button>
+			</form>
+		</dialog>
 
 		<dialog id="modal-word-desc">
 			<div class="modal-word">Слово</div>
@@ -33,6 +41,18 @@
 				<button class="js-show-field">Посмотреть поле</button>
 			</form>
 		</dialog>
+
+		<!-- <div class="area-table">
+			<div class="area-table__title">Слова</div>
+			<div class="area-table__content">
+				<div class="area-table__base-list">
+					<div class="area-table__title">Загаданные</div>
+				</div>
+				<div class="area-table__bonus-list">
+					<div class="area-table__title">Бонусные</div>
+				</div>
+			</div>
+		</div> -->
 
 		<div class="area-wrapper">
 			<div class="inputed-word"></div>

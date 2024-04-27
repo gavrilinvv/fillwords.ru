@@ -1,6 +1,7 @@
 import "/src/scss/style.scss";
 import { WORDS } from "/src/js/words";
 import { SCHEME } from "/src/js/scheme";
+import { CountUp } from '/src/js/countUp.min.js';
 // import ProgressBar from "/src/js/progressbar.min.js";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,21 +13,22 @@ document.addEventListener('DOMContentLoaded', () => {
 	let schemeInGame = '';
 	let gridSize = 6;
 	let wordColors = ['7FB5B5', 'A18594', 'B39F7A', '3EB489', 'F9F8BB', 'FFC1CC', 'BADBAD', 'FFCF48', 'CCCCFF', 'DAD871'];
+	let foundedBonusWords = []; // массив найденных бонусных слов
 	// let xp = 0;
 	let bar;
 	let copyWordColors;
-
-	// TODO
-	// Запрет на использование слов повторно
-	// Запрет на выделение ячеек через ячейку с найденным словом
+	let counter;
 
 	const mainTitle = document.querySelector('.main-title');
 	const inputedWord = document.querySelector('.inputed-word');
+	const scoreBlock = document.querySelector('.score');
+	const notice = document.querySelector('.notice');
 
 	const modalUnknownWord = document.getElementById("modal-unkown-word");
 	const modalOtherPath = document.getElementById("modal-other-path");
 	const modalWin = document.getElementById("modal-win");
 	const modalDesc = document.getElementById("modal-word-desc");
+	const modalFoundBonus = document.getElementById("modal-found-bonus");
 
 	const btnSettings = document.querySelector(".js-settings");
 	const btnAbout = document.querySelector(".js-about");
@@ -49,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		lastSelectedWord = [];
 		selectingWord = [];
 		selectingPrevLetter = [];
+		foundedBonusWords = [];
 
 		modalDesc.close();
 	}
@@ -106,7 +109,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				schemeInGame = getScheme(gridSize + 'x' + gridSize);
 				fillGrid(schemeInGame);
 				initEvents();
-				// initXPBar();
+
+				scoreBlock.innerHTML = '0';
+				counter = new CountUp(scoreBlock, 0, {
+					startVal: scoreBlock.innerHTML === '0' ? 0 : +scoreBlock.innerHTML + word.length
+				});
+				if (!counter.error) {
+					counter.start();
+				}
 			})
 		})
 		btnBack.forEach(btn => {
@@ -179,11 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function getWordByLength(length) {
-		return _shuffle(WORDS.filter(word => !wordsInGame.some(wordInGame => wordInGame.name === word.name))).find(word => word.name.length === length);
+		return _shuffle(WORDS.filter(word => !wordsInGame.some(wordInGame => wordInGame.name === word.name))).find(word => word.name.length === length && !word.isPrimary);
 	}
 
 	function fillGrid(scheme) {
-		console.log(scheme);
 		scheme.forEach(coords => {
 			let countLetters = coords.length;
 			wordsInGame.push(getWordByLength(countLetters));
@@ -286,30 +295,31 @@ document.addEventListener('DOMContentLoaded', () => {
 	function checkWord() {
 		let word = getWordByCoords(selectingWord);
 
+		if (foundedBonusWords.includes(word)) {
+			modalFoundBonus.showModal();
+			return;
+		}
+
 		if (selectingWord.length && (getWordByCoords(lastSelectedWord) === word)) {
 			modalUnknownWord.showModal();
 			return;
 		}
 		lastSelectedWord = selectingWord;
 
-		// если нашел слово, которое есть в базе, но нет на поле
-		// if ( WORDS.some(arrWord => arrWord.name === word) ) {
-		// 	// alert('Слово ' + word + ' есть');
-		// 	return;
-		// }
-
 		// если слово собрано верно
 		if ( schemeInGame.some(scheme => equalsCheck(scheme, selectingWord)) ) {
 
 			// выбор цвета для слова
-			let colorWord = _getRandomFromArray(copyWordColors);
+			let colorWord = _hex2rgba(_getRandomFromArray(copyWordColors));
 			_removeItemFromArrayByValue(copyWordColors, colorWord);
+
+			counter.update(+scoreBlock.innerHTML + word.length);
 
 			selectingWord.forEach((coords, i) => {
 				let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
 				cell.classList.add('correct');
 				cell.classList.remove('selected');
-				cell.style.backgroundColor = '#' + colorWord;
+				cell.style.backgroundColor = colorWord;
 				cell.setAttribute('data-word', word);
 
 				$(cell).velocity({scale: 1.1}, 200);
@@ -323,10 +333,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 					modalDesc.showModal();
 				})
-
-				if (i === 0) {
-					cell.classList.add('correct-first');
-				}
 			})
 
 			if (selectingWord.length > 1) {
@@ -338,15 +344,35 @@ document.addEventListener('DOMContentLoaded', () => {
 				}, 2000)
 			}
 
-			// addXP(5);
-
 			setTimeout(() => {
 				checkWin()
 			}, 1000);
-		} else if (wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord))) {
+		}
+		// если нашел слово, которое есть в базе, но нет на поле (бонусное)
+		else if (
+			WORDS.some(arrWord => arrWord.name === word) && schemeInGame.some(scheme => equalsCheck(scheme, selectingWord)) ||
+			WORDS.some(arrWord => arrWord.name === word) && !wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord))
+		) {
+			inputedWord.classList.add('inputed-word-correct');
+			let wordCells = selectingWord.map(coords => document.querySelector('.cell[data-coords="' + coords + '"]'));
+			_animateWord(wordCells);
+
+			notice.innerHTML = 'Бонусное слово!';
+			counter.update(+scoreBlock.innerHTML + word.length);
+			foundedBonusWords.push(word);
+
+			setTimeout(() => {
+				clearInputedWord();
+				notice.innerHTML = '';
+			}, 2000)
+			return;
+		}
+		// собери слово по другому
+		else if (wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord))) {
 			lastSelectedWord = [];
 			modalOtherPath.showModal();
-		} else {
+		}
+		else {
 			if (selectingWord.length > 1) {
 				inputedWord.classList.add('inputed-word-incorrect');
 				setTimeout(() => {
@@ -360,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function clearInputedWord() {
-		inputedWord.innerHTML = "";
+		inputedWord.innerHTML = '';
 		inputedWord.classList.remove('inputed-word-active');
 		inputedWord.classList.remove('inputed-word-correct');
 		inputedWord.classList.remove('inputed-word-incorrect');
@@ -559,6 +585,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		// 	delay: (el, i) => 70*i
 		// })
 	}
+
+	function _hex2rgba(hex) {
+		const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
+		return `rgba(${r},${g},${b},0.7)`;
+	};
 
 	function initXPBar() {
 		document.querySelector("#ui-xp-circle").innerHTML = '';
