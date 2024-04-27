@@ -295,6 +295,7 @@ body {
 	@include fluid('font-size', 36px);
 	@include fluid('right', 12px, 8px);
 	@include fluid('top', 12px, 56px);
+	text-shadow: 0 0 8px white;
 }
 
 .notice {
@@ -340,6 +341,7 @@ body {
 	width: 320px;
 	margin: 0 auto;
 	bottom: 5%;
+	z-index: 1;
 
 	@include mobile {
 		position: absolute;
