@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			_animateWord(wordCells);
 
 			notice.innerHTML = 'Бонусное слово!';
-			counter.update(+scoreBlock.innerHTML + word.length);
+			counter.update(+scoreBlock.innerHTML + word.length * 2);
 			foundedBonusWords.push(word);
 
 			setTimeout(() => {
