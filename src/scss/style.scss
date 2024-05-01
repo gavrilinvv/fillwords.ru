@@ -293,21 +293,22 @@ body {
 	position: absolute;
 	color: white;
 	@include fluid('font-size', 36px);
-	@include fluid('right', 12px, 8px);
+	right: 35%;
 	@include fluid('top', 12px, 56px);
 	text-shadow: 0 0 8px white;
+
+	@include mobile {
+		@include fluid('right', 8px);
+	}
 }
 
 .notice {
 	position: absolute;
-	top: 20%;
+	@include fluid('top', -60px);
 	@include fluid('font-size', 42px);
+	text-wrap: nowrap;
     color: white;
 	z-index: 3;
-
-	@include mobile {
-		top: 16%;
-	}
 }
 
 .banner {
@@ -391,11 +392,15 @@ body {
 		background-position: center;
 		@include fluid('height', 48px);
 		@include fluid('width', 48px);
-		@include fluid('left', 12px, 8px);
+		left: 35%;
 		@include fluid('top', 12px, 56px);
 		min-width: unset;
 		max-width: unset;
 		box-sizing: border-box;
+
+		@include mobile {
+			@include fluid('left', 8px);
+		}
 	}
 }
 
@@ -439,7 +444,7 @@ body {
 
 .inputed-word {
 	position: absolute;
-	@include fluid('top', -60px);
+	@include fluid('bottom', -60px);
 	@include fluid('font-size', 32px);
 	@include fluid('padding-top', 4px);
 	@include fluid('padding-bottom', 4px);

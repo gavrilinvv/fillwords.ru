@@ -237,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			btnNextLevelModal.forEach(btn => btn.classList.remove('_hidden'));
 			btnNextLevel.forEach(btn => btn.classList.add('_hidden'));
 			modalWin.showModal();
-			// addXP(10);
 
 			return;
 		}
@@ -295,6 +294,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	function checkWord() {
 		let word = getWordByCoords(selectingWord);
 
+		console.log(selectingWord, lastSelectedWord, getWordByCoords(lastSelectedWord), word);
+
 		if (foundedBonusWords.includes(word)) {
 			modalFoundBonus.showModal();
 			return;
@@ -302,7 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		if (selectingWord.length && (getWordByCoords(lastSelectedWord) === word)) {
 			modalUnknownWord.showModal();
-			return;
 		}
 		lastSelectedWord = selectingWord;
 
@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		// собери слово по другому
 		else if (wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord))) {
-			lastSelectedWord = [];
+			// lastSelectedWord = [];
 			modalOtherPath.showModal();
 		}
 		else {
@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 
 		selectingWord = [];
-		lastSelectedWord = [];
+		// lastSelectedWord = [];
 	}
 
 	function clearInputedWord() {

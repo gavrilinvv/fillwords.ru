@@ -7,7 +7,6 @@
 		</div> -->
 
 		<div class="score">0</div>
-		<div class="notice"></div>
 
 		<dialog id="modal-unkown-word">Я не знаю такого слова
 			<form method="dialog">
@@ -55,9 +54,10 @@
 		</div> -->
 
 		<div class="area-wrapper">
-			<div class="inputed-word"></div>
+			<div class="notice"></div>
 			<div id="area"></div>
 			<div class="button button-next-level js-next-level _mt-16 _hidden">Новый&nbsp;уровень</div>
+			<div class="inputed-word"></div>
 		</div>
 	</div>
 </div>
