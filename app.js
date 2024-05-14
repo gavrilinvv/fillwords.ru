@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let schemeInGame = '';
 	let gridSize = 6;
 	let wordColors = ['7FB5B5', 'A18594', 'B39F7A', '3EB489', 'F9F8BB', 'FFC1CC', 'BADBAD', 'FFCF48', 'CCCCFF', 'DAD871'];
+	let foundedWords = []; // массив найденных слов
 	let foundedBonusWords = []; // массив найденных бонусных слов
 	// let xp = 0;
 	let bar;
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		lastSelectedWord = [];
 		selectingWord = [];
 		selectingPrevLetter = [];
+		foundedWords = [];
 		foundedBonusWords = [];
 
 		modalDesc.close();
@@ -294,14 +296,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	function checkWord() {
 		let word = getWordByCoords(selectingWord);
 
-		console.log(selectingWord, lastSelectedWord, getWordByCoords(lastSelectedWord), word);
+		// console.log(selectingWord, lastSelectedWord, getWordByCoords(lastSelectedWord), word);
 
+		// бонусное слово уже найдено
 		if (foundedBonusWords.includes(word)) {
 			modalFoundBonus.showModal();
 			return;
 		}
 
-		if (selectingWord.length && (getWordByCoords(lastSelectedWord) === word)) {
+		// не знаю такого слова
+		if (selectingWord.length && (getWordByCoords(lastSelectedWord) === word) && !wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord))) {
 			modalUnknownWord.showModal();
 		}
 		lastSelectedWord = selectingWord;
@@ -310,16 +314,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		if ( schemeInGame.some(scheme => equalsCheck(scheme, selectingWord)) ) {
 
 			// выбор цвета для слова
-			let colorWord = _hex2rgba(_getRandomFromArray(copyWordColors));
+			let colorWord = _getRandomFromArray(copyWordColors)
 			_removeItemFromArrayByValue(copyWordColors, colorWord);
 
 			counter.update(+scoreBlock.innerHTML + word.length);
+			foundedWords.push(word);
 
 			selectingWord.forEach((coords, i) => {
 				let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
 				cell.classList.add('correct');
 				cell.classList.remove('selected');
-				cell.style.backgroundColor = colorWord;
+				cell.style.backgroundColor = _hex2rgba(colorWord);
 				cell.setAttribute('data-word', word);
 
 				$(cell).velocity({scale: 1.1}, 200);
@@ -357,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let wordCells = selectingWord.map(coords => document.querySelector('.cell[data-coords="' + coords + '"]'));
 			_animateWord(wordCells);
 
-			notice.innerHTML = 'Бонусное слово!';
+			notice.innerHTML = 'Бонусное&nbsp;слово!';
 			counter.update(+scoreBlock.innerHTML + word.length * 2);
 			foundedBonusWords.push(word);
 
@@ -367,9 +372,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			}, 2000)
 			return;
 		}
-		// собери слово по другому
-		else if (wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord))) {
-			// lastSelectedWord = [];
+		// собери слово по другому (если слово есть на уровне и слово еще не разгадано)
+		else if (wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord)) && !foundedWords.includes(word)) {
+			setTimeout(() => {
+				clearInputedWord();
+			}, 2000)
 			modalOtherPath.showModal();
 		}
 		else {
