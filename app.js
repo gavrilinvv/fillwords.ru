@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let bar;
 	let copyWordColors;
 	let counter;
+	let scoreLS;
 
 	const mainTitle = document.querySelector('.main-title');
 	const inputedWord = document.querySelector('.inputed-word');
@@ -71,6 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		bar.animate(xp/1000);  // Number from 0.0 to 1.0
 	}
 
+	function initScore() {
+		if (localStorage.getItem('fillwords_score')) {
+			scoreBlock.innerHTML = localStorage.getItem('fillwords_score');
+		} else {
+			scoreBlock.innerHTML = '0';
+		}
+	}
+
 	function initBtns() {
 		btnSettings.addEventListener('click', () => {
 			showScreen('settings-screen');
@@ -111,11 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				schemeInGame = getScheme(gridSize + 'x' + gridSize);
 				fillGrid(schemeInGame);
 				initEvents();
+				initScore();
 
-				scoreBlock.innerHTML = '0';
-				counter = new CountUp(scoreBlock, 0, {
-					startVal: scoreBlock.innerHTML === '0' ? 0 : +scoreBlock.innerHTML + word.length
-				});
+				counter = new CountUp(scoreBlock, scoreBlock.innerHTML);
 				if (!counter.error) {
 					counter.start();
 				}
@@ -318,6 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			_removeItemFromArrayByValue(copyWordColors, colorWord);
 
 			counter.update(+scoreBlock.innerHTML + word.length);
+			localStorage.setItem('fillwords_score', +scoreBlock.innerHTML + word.length);
 			foundedWords.push(word);
 
 			selectingWord.forEach((coords, i) => {
@@ -364,6 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			notice.innerHTML = 'Бонусное&nbsp;слово!';
 			counter.update(+scoreBlock.innerHTML + word.length * 2);
+			localStorage.setItem('fillwords_score', +scoreBlock.innerHTML + word.length * 2);
 			foundedBonusWords.push(word);
 
 			setTimeout(() => {
