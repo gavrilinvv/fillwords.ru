@@ -55,7 +55,7 @@
 
 		<div class="area-wrapper">
 			<div class="notice"></div>
-			<div id="area"></div>
+			<div id="area" class="area"></div>
 			<div class="button button-next-level js-next-level _mt-16 _hidden">Новый&nbsp;уровень</div>
 			<div class="inputed-word"></div>
 		</div>
