@@ -482,6 +482,12 @@ dialog[open] {
 		background: rgba(0, 0, 0, 0.5);
 	}
 
+	& a {
+		color: #000;
+		text-decoration: underline;
+		outline: none;
+	}
+
 	& button {
 		outline: none;
 		border: none;

@@ -8,7 +8,9 @@
 
 		<div class="score">0</div>
 
-		<dialog id="modal-unkown-word">Я не знаю такого слова
+		<dialog id="modal-unkown-word">
+			<span>Неизвестное слово.<br>
+			Напишите нам на <a href="mailto:fillwords.contact@gmail.com">почту</a>, чтобы мы его добавили</a>
 			<form method="dialog">
 				<button>Понятно</button>
 			</form>
