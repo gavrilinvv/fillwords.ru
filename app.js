@@ -44,6 +44,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	const descModal = document.querySelector(".modal-desc");
 	initBtns();
 	initTitleAnimate();
+	console.log(checkDuplicates());
+
+	function checkDuplicates() {
+		const lookup = WORDS.reduce((a, e) => {
+			a[e.name] = ++a[e.name] || 0;
+			return a;
+		}, {});
+
+		return  WORDS.filter(e => lookup[e.name]).length ? WORDS.filter(e => lookup[e.name]) : 'No duplicates';
+	}
 
 	function resetGame() {
 		copyWordColors = [...wordColors];
