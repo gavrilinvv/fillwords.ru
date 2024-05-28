@@ -3,14 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Филворды | Браузерная игра</title>
+	<title>Филворды | Бесплатная браузерная игра</title>
 
-	<meta property="og:title" content="Филворды | Браузерная игра"/>
+	<meta property="og:title" content="Филворды | Бесплатная браузерная игра"/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://fillwords.ru" />
-	<meta name="description" content="Филворды это простая головоломка для всей семьи, в которой надо искать слова на игровом поле. Онлайн, бесплатно и без регистрации" />
-	<meta property="og:description" content="Филворды это простая головоломка для всей семьи, в которой надо искать слова на игровом поле. Онлайн, бесплатно и без регистрации" />
-	<meta name="keywords" content="Филворды, бесплатная браузерная игра, головоломка, играть без регистрации, онлайн, найти слова, на поле, поиск слов" />
+	<meta name="description" content="Филворды это простая головоломка для всей семьи, в которой надо искать разные слова на игровом поле. Онлайн, бесплатно и без регистрации" />
+	<meta property="og:description" content="Филворды это простая головоломка для всей семьи, в которой надо искать разные слова на игровом поле. Онлайн, бесплатно и без регистрации" />
+	<meta name="keywords" content="Филворды, бесплатная браузерная игра, головоломка, играть без регистрации, онлайн, найти слова, на поле, поиск слов, словарный запас" />
 	<meta name="yandex-verification" content="738fcd3e75cf5f96" />
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

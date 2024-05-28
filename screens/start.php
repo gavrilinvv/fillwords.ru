@@ -1,8 +1,8 @@
 <div id="start-screen" class="screen">
 	<div class="container _flex-column">
-		<!-- <h1 class="main-title">Филворды</h1> -->
+		<h1 class="main-title">Филворды</h1>
 
-		<div class="logo__container">
+		<!-- <div class="logo__container">
 			<div class="logo__col">
 				<div class="logo__cell">А</div>
 				<div class="logo__cell">Д</div>
@@ -55,8 +55,7 @@
 				<div class="logo__cell">К</div>
 				<div class="logo__cell">Б</div>
 			</div>
-		</div>
-
+		</div> -->
 
 		<!-- <div style="width: 500px">
 			<svg class="main-title" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 100.24">
@@ -66,7 +65,7 @@
 
 		<div class="button js-settings _mb-16">Играть</div>
 
-		<div class="button js-about _mb-16">Об игре</div>
+		<div class="button js-about _mb-16">Правила</div>
 
 		<div class="button js-to-other-games">Другие игры</div>
 	</div>
