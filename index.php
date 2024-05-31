@@ -2,9 +2,13 @@
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="canonical" href="https://fillwords.ru"/>
 	<title>Филворды | Бесплатная браузерная игра</title>
-
 	<meta property="og:title" content="Филворды | Бесплатная браузерная игра"/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://fillwords.ru" />
