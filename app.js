@@ -324,7 +324,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		// не знаю такого слова
 		if (selectingWord.length && (getWordByCoords(lastSelectedWord) === word) && !wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord))) {
 			window.ym(96564571,'reachGoal',{newWord: getWordByCoords(selectingWord)})
-			window.ym(96564571,'params',{newWord: getWordByCoords(selectingWord)})
 			modalUnknownWord.showModal();
 		}
 		lastSelectedWord = selectingWord;
