@@ -323,7 +323,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// не знаю такого слова
 		if (selectingWord.length && (getWordByCoords(lastSelectedWord) === word) && !wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord))) {
-			window.ym(96564571,'reachGoal',{newWord: getWordByCoords(selectingWord)})
 			modalUnknownWord.showModal();
 		}
 		lastSelectedWord = selectingWord;
@@ -402,6 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		else {
 			if (selectingWord.length > 1) {
 				inputedWord.classList.add('inputed-word-incorrect');
+				window.ym(96564571,'reachGoal',{newWord: getWordByCoords(selectingWord)})
 				setTimeout(() => {
 					clearInputedWord();
 				}, 2000)
