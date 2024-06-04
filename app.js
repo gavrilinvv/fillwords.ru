@@ -402,6 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (selectingWord.length > 1) {
 				inputedWord.classList.add('inputed-word-incorrect');
 				window.ym(96564571,'reachGoal', 'newWord',{newWord: getWordByCoords(selectingWord)})
+				console.log('reachGoal', getWordByCoords(selectingWord));
 				setTimeout(() => {
 					clearInputedWord();
 				}, 2000)
