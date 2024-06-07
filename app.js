@@ -384,6 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			counter.update(+scoreBlock.innerHTML + word.length * 2);
 			localStorage.setItem('fillwords_score', +scoreBlock.innerHTML + word.length * 2);
 			foundedBonusWords.push(word);
+			window.ym(96564571,'reachGoal','bonusWord',{bonusWord: getWordByCoords(selectingWord)})
 
 			setTimeout(() => {
 				clearInputedWord();
@@ -402,7 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (selectingWord.length > 1) {
 				inputedWord.classList.add('inputed-word-incorrect');
 				window.ym(96564571,'reachGoal', 'newWord',{newWord: getWordByCoords(selectingWord)})
-				console.log('reachGoal', getWordByCoords(selectingWord));
 				setTimeout(() => {
 					clearInputedWord();
 				}, 2000)
