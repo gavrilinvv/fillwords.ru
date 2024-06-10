@@ -243,14 +243,18 @@ body {
 }
 
 .container {
-	// @include fluid('width', 1000px);
-	width: 100vw;
+	@include fluid('width', 600px);
+	// width: 100vw;
 	margin: 0 auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: 100svh;
 	position: relative;
+
+	@include mobile {
+		width: 100vw;
+	}
 }
 
 ._inner-padding {
@@ -292,8 +296,8 @@ body {
 	position: absolute;
 	color: white;
 	@include fluid('font-size', 36px);
-	right: 35%;
-	@include fluid('top', 12px, 56px);
+	right: 4%;
+	@include fluid('top', 12px, 12px);
 	text-shadow: 0 0 8px white;
 
 	@include mobile {
@@ -311,7 +315,7 @@ body {
 }
 
 .banner {
-	// background: rgba(255, 255, 255, 0.5);
+	background: rgba(255, 255, 255, 0.5);
 	display: block;
 	position: absolute;
 }
@@ -391,8 +395,8 @@ body {
 		background-position: center;
 		@include fluid('height', 48px);
 		@include fluid('width', 48px);
-		left: 35%;
-		@include fluid('top', 12px, 56px);
+		left: 4%;
+		@include fluid('top', 12px, 12px);
 		min-width: unset;
 		max-width: unset;
 		box-sizing: border-box;
