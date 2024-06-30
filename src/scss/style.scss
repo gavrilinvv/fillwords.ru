@@ -103,6 +103,49 @@ body {
 	// animation: gradient 90s infinite;
 }
 
+.option {
+	backdrop-filter: blur(6px);
+	@include fluid('font-size', 32px, 24px);
+	@include fluid('margin-bottom', 16px);
+	transition: .3s;
+}
+.option input[type=radio] {
+	display: none;
+}
+.option label {
+	display: inline-block;
+	cursor: pointer;
+	@include fluid('padding-top', 0px);
+	@include fluid('padding-bottom', 0px);
+	@include fluid('padding-left', 15px);
+	@include fluid('padding-right', 15px);
+	border: 2px solid #fff;
+	@include fluid('border-radius', 6px);
+	@include fluid('min-width', 160px);
+	text-align: center;
+	user-select: none;
+	color: #fff;
+}
+
+/* Checked */
+.option input[type=radio]:checked + label {
+	background: #fff;
+	color: #000;
+	transition: .3s;
+}
+
+/* Hover */
+.option label:hover {
+	color: #fff;
+	transition: .3s;
+}
+
+/* Disabled */
+.option input[type=radio]:disabled + label {
+	background: #efefef;
+	color: #fff;
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -130,6 +173,7 @@ body {
 	cursor: pointer;
 	// @include fluid('margin', 2px);
 	transition: .6s;
+	text-transform: uppercase;
 	// clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 0% 100%, 0% 0px);
 
 	background: rgba(255, 255, 255, 0.4);
@@ -152,12 +196,12 @@ body {
 	&-sm {
 		@include fluid('width', 60px, 42px);
 		@include fluid('height', 60px, 42px);
-		@include fluid('font-size', 32px, 24px);
+		@include fluid('font-size', 26px, 20px);
 	}
 	&-xs {
 		@include fluid('width', 48px, 36px);
 		@include fluid('height', 48px, 36px);
-		@include fluid('font-size', 32px, 24px);
+		@include fluid('font-size', 26px, 20px);
 	}
 }
 // .red {
@@ -445,6 +489,7 @@ body {
 
 .inputed-word {
 	position: absolute;
+	text-transform: uppercase;
 	@include fluid('bottom', -60px);
 	@include fluid('font-size', 32px);
 	@include fluid('padding-top', 4px);

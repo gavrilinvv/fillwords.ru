@@ -1,5 +1,6 @@
 import "/src/scss/style.scss";
-import { WORDS } from "/src/js/words";
+import { WORDS_RUS } from "/src/js/words_rus";
+import { WORDS_ENG } from "/src/js/words_eng";
 import { SCHEME } from "/src/js/scheme";
 import { CountUp } from '/src/js/countUp.min.js';
 // import ProgressBar from "/src/js/progressbar.min.js";
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let schemeInGame = '';
 	let gridSize = 6;
 	let wordColors = ['7FB5B5', 'A18594', 'B39F7A', '3EB489', 'F9F8BB', 'FFC1CC', 'BADBAD', 'FFCF48', 'CCCCFF', 'DAD871', 'AFEEEE', 'E4717A'];
+	let WORDS = null; // массив слов, соответствующий выбранному языку
 	let foundedWords = []; // массив найденных слов
 	let foundedBonusWords = []; // массив найденных бонусных слов
 	// let xp = 0;
@@ -20,6 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	let copyWordColors;
 	let counter;
 	let scoreLS;
+	let options = {
+		lang: 'rus',
+		grid: '3'
+	}
 
 	const mainTitle = document.querySelector('.main-title');
 	const inputedWord = document.querySelector('.inputed-word');
@@ -42,11 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	const btnShowField = document.querySelectorAll(".js-show-field");
 	const wordModal = document.querySelector(".modal-word");
 	const descModal = document.querySelector(".modal-desc");
+	const optionsLang = document.querySelectorAll('.option input[name="lang"]');
+	const optionsGrid = document.querySelectorAll('.option input[name="grid"]');
+
 	initBtns();
 	initTitleAnimate();
 	console.log(checkDuplicates());
 
 	function checkDuplicates() {
+		let WORDS = WORDS_RUS.concat(WORDS_ENG);
 		const lookup = WORDS.reduce((a, e) => {
 			a[e.name] = ++a[e.name] || 0;
 			return a;
@@ -123,7 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			btn.addEventListener('click', () => {
 				showScreen('game-screen');
 
-				gridSize = btn.getAttribute('data-grid');
+				gridSize = options.grid;
+				WORDS = getWords(options.lang);
 
 				resetGame();
 				createGrid(gridSize, gridSize);
@@ -143,6 +154,22 @@ document.addEventListener('DOMContentLoaded', () => {
 				showScreen('start-screen');
 			})
 		})
+
+		optionsLang.forEach(option => {
+			option.addEventListener('click', () => {
+				options.lang = option.value;
+			})
+		});
+
+		optionsGrid.forEach(option => {
+			option.addEventListener('click', () => {
+				options.grid = option.value;
+			})
+		});
+	}
+
+	function getWords(lang) {
+		return lang === 'rus' ? WORDS_RUS : WORDS_ENG
 	}
 
 	function showScreen(screen) {
