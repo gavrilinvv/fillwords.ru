@@ -497,6 +497,7 @@ body {
 	@include fluid('padding-right', 12px);
 	@include fluid('padding-left', 12px);
 	@include fluid('border-radius', 4px);
+	user-select: none;
 
 	&-active {
 		background-color: #ffffffba;
