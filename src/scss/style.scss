@@ -449,6 +449,25 @@ body {
 			@include fluid('left', 8px);
 		}
 	}
+
+	&-new {
+		position: relative;
+		&:before {
+			content: 'new';
+			position: absolute;
+			background-color: #82f33a;
+			color: #333;
+			align-content: center;
+			@include fluid('top', -8px, -10px);
+			@include fluid('right', -14px);
+			@include fluid('height', 24px);
+			@include fluid('font-size', 16px, 14px);
+			@include fluid('padding-right', 8px);
+			@include fluid('padding-left', 8px);
+			@include fluid('border-radius', 6px);
+		}
+	}
+
 }
 
 .blocked {

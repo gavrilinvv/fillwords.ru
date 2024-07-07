@@ -6,7 +6,9 @@
 
 			<a href="https://ugadai-film.ru" target="_blank" rel="nofollow" class="button _mb-16">Угадай фильм по кадру</a>
 
-			<a href="https://memo-cards.ru" target="_blank" rel="nofollow" class="button">Memo-cards</a>
+			<a href="https://memo-cards.ru" target="_blank" rel="nofollow" class="button _mb-16">Memo-cards</a>
+
+			<a href="https://hangman-game.ru" target="_blank" rel="nofollow" class="button button-new">Виселица</a>
 		</div>
 	</div>
 </div>

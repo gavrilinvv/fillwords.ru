@@ -67,6 +67,6 @@
 
 		<div class="button js-about _mb-16">Правила</div>
 
-		<div class="button js-to-other-games">Другие игры</div>
+		<div class="button js-to-other-games button-new">Другие игры</div>
 	</div>
 </div>
