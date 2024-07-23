@@ -368,6 +368,7 @@ body {
 	top: 25%;
 	height: 400px;
 	width: 240px;
+	z-index: 2;
 
 	@include mobile {
 		display: none;
