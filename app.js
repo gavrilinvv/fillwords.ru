@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				initEvents();
 				initScore();
 
-				counter = new CountUp(scoreBlock, scoreBlock.innerHTML);
+				counter = new CountUp(scoreBlock, scoreBlock.innerHTML, {separator: ' ',});
 				if (!counter.error) {
 					counter.start();
 				}
