@@ -361,8 +361,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			let colorWord = _getRandomFromArray(copyWordColors)
 			_removeItemFromArrayByValue(copyWordColors, colorWord);
 
-			counter.update(+scoreBlock.innerHTML + word.length);
-			localStorage.setItem('fillwords_score', +scoreBlock.innerHTML + word.length);
+			counter.update(+scoreBlock.innerHTML.replace(/\D/, '') + word.length);
+			localStorage.setItem('fillwords_score', +scoreBlock.innerHTML.replace(/\D/, '') + word.length);
 			foundedWords.push(word);
 
 			selectingWord.forEach((coords, i) => {
@@ -408,8 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			_animateWord(wordCells);
 
 			notice.innerHTML = 'Бонусное&nbsp;слово!';
-			counter.update(+scoreBlock.innerHTML + word.length * 2);
-			localStorage.setItem('fillwords_score', +scoreBlock.innerHTML + word.length * 2);
+			counter.update(+scoreBlock.innerHTML.replace(/\D/, '') + word.length * 2);
+			localStorage.setItem('fillwords_score', +scoreBlock.innerHTML.replace(/\D/, '') + word.length * 2);
 			foundedBonusWords.push(word);
 			window.ym(96564571,'reachGoal','bonusWord',{bonusWord: getWordByCoords(selectingWord)})
 
