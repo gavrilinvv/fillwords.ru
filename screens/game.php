@@ -6,6 +6,8 @@
 			<div class="ui-xp-level">Уровень 1</div>
 		</div> -->
 
+		<div class="hint js-hint-modal _hidden"></div>
+
 		<div class="score">0</div>
 
 		<dialog id="modal-unkown-word">
@@ -39,6 +41,13 @@
 			<form method="dialog">
 				<button class="js-next-level-modal">Новый уровень</button>
 				<button class="js-show-field">Посмотреть поле</button>
+			</form>
+		</dialog>
+
+		<dialog id="modal-hint">Получить подсказку после просмотра короткой рекламы?
+			<form method="dialog">
+				<button class="js-get-hint">Да</button>
+				<button class="js-show-field">Нет</button>
 			</form>
 		</dialog>
 

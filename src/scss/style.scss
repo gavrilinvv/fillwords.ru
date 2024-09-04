@@ -225,46 +225,46 @@ body {
 		position: relative;
 	}
 
-	&-table {
-		position: absolute;
-		@include fluid('top', 10px);
-		@include fluid('width', 300px, 200px);
-		// @include fluid('height', 10px);
-		background: white;
-		height: auto;
-		@include fluid('padding-top', 8px);
-		@include fluid('padding-bottom', 8px);
-		@include fluid('padding-left', 8px);
-		@include fluid('padding-right', 8px);
-		@include fluid('border-radius', 4px);
-		cursor: pointer;
-		user-select: none;
+	// &-table {
+	// 	position: absolute;
+	// 	@include fluid('top', 10px);
+	// 	@include fluid('width', 300px, 200px);
+	// 	// @include fluid('height', 10px);
+	// 	background: white;
+	// 	height: auto;
+	// 	@include fluid('padding-top', 8px);
+	// 	@include fluid('padding-bottom', 8px);
+	// 	@include fluid('padding-left', 8px);
+	// 	@include fluid('padding-right', 8px);
+	// 	@include fluid('border-radius', 4px);
+	// 	cursor: pointer;
+	// 	user-select: none;
 
-		&-opened {
-			& .area-table__content {
-				display: flex;
-			}
-		}
+	// 	&-opened {
+	// 		& .area-table__content {
+	// 			display: flex;
+	// 		}
+	// 	}
 
-		&__content {
-			display: none;
-			justify-content: space-between;
-		}
+	// 	&__content {
+	// 		display: none;
+	// 		justify-content: space-between;
+	// 	}
 
-		&__title {
-			@include fluid('font-size', 18px);
-			text-align: center;
-		}
+	// 	&__title {
+	// 		@include fluid('font-size', 18px);
+	// 		text-align: center;
+	// 	}
 
-		&__word {
-			display: block;
-			text-decoration: line-through;
-		}
-	}
+	// 	&__word {
+	// 		display: block;
+	// 		text-decoration: line-through;
+	// 	}
+	// }
 
-	&__bonus-list {
+	// &__bonus-list {
 
-	}
+	// }
 }
 
 #game-screen {
@@ -341,10 +341,11 @@ body {
 	color: white;
 	@include fluid('font-size', 36px);
 	right: 4%;
-	@include fluid('top', 12px, 12px);
+	@include fluid('top', 12px, 18px);
 	text-shadow: 0 0 8px white;
 
 	@include mobile {
+		@include fluid('font-size', 22px);
 		@include fluid('right', 8px);
 	}
 }
@@ -354,8 +355,22 @@ body {
 	@include fluid('top', -60px);
 	@include fluid('font-size', 42px);
 	text-wrap: nowrap;
-    color: white;
+	color: white;
 	z-index: 3;
+}
+
+.hint {
+	position: absolute;
+	cursor: pointer;
+	background-color: white;
+	background-image: url('../img/hint.webp');
+	background-repeat: no-repeat;
+	background-size: 65%;
+	background-position: center;
+	@include fluid('top', 12px, 12px);
+	@include fluid('height', 40px);
+	@include fluid('width', 40px);
+	@include fluid('border-radius', 50px);
 }
 
 .banner {
@@ -502,6 +517,17 @@ body {
 // 	animation: wow ease-in-out .6s;
 // 	transition: .6s;
 // }
+.hinted {
+	// background: red!important;
+	background: repeating-linear-gradient(-45deg, transparent, transparent 1rem, #53d5b2 1rem, transparent 2rem);
+	background-size: 200% 200%;
+	animation: gradient 12s linear infinite;
+}
+@keyframes gradient {
+	100% {
+		background-position: 100% 100%;
+	}
+}
 
 .row {
 	display: flex;
@@ -542,7 +568,6 @@ dialog[open] {
 	@include fluid('font-size', 22px);
 	display: flex;
     flex-direction: column;
-    align-items: center;
 
 	@include mobile {
 		width: 80%;

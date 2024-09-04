@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let selectingPrevLetter = [];
 	let lastSelectedWord = [];
 	let wordsInGame = [];
+	let wordsInGameCoords = [];
 	let schemeInGame = '';
 	let gridSize = 6;
 	let wordColors = ['7FB5B5', 'A18594', 'B39F7A', '3EB489', 'F9F8BB', 'FFC1CC', 'BADBAD', 'FFCF48', 'CCCCFF', 'DAD871', 'AFEEEE', 'E4717A'];
@@ -18,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	let foundedWords = []; // массив найденных слов
 	let foundedBonusWords = []; // массив найденных бонусных слов
 	// let xp = 0;
+	let hintCounter = 0; // счетчик подсказок. нужен чтобы подсказывать последующую букву в загаданном слове
+	let triesCounter = 0; // счетчик попыток
 	let bar;
 	let copyWordColors;
 	let counter;
@@ -37,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const modalWin = document.getElementById("modal-win");
 	const modalDesc = document.getElementById("modal-word-desc");
 	const modalFoundBonus = document.getElementById("modal-found-bonus");
+	const modalHint = document.getElementById("modal-hint");
 
 	const btnSettings = document.querySelector(".js-settings");
 	const btnAbout = document.querySelector(".js-about");
@@ -46,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	const btnNextLevelModal = document.querySelectorAll(".js-next-level-modal");
 	const btnOtherGames = document.querySelector(".js-to-other-games");
 	const btnShowField = document.querySelectorAll(".js-show-field");
+	const btnHintModal = document.querySelector(".js-hint-modal");
+	const btnGetHint = document.querySelector(".js-get-hint");
 	const wordModal = document.querySelector(".modal-word");
 	const descModal = document.querySelector(".modal-desc");
 	const optionsLang = document.querySelectorAll('.option input[name="lang"]');
@@ -70,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		area.innerHTML = '';
 		schemeInGame = '';
 		wordsInGame = [];
+		wordsInGameCoords = [];
+		options.grid = '3';
 		lastSelectedWord = [];
 		selectingWord = [];
 		selectingPrevLetter = [];
@@ -129,6 +137,25 @@ document.addEventListener('DOMContentLoaded', () => {
 		btnAbout.addEventListener('click', () => {
 			showScreen('about-screen');
 		})
+		btnHintModal.addEventListener('click', () => {
+			modalHint.showModal();
+		})
+		btnGetHint.addEventListener('click', () => {
+			window.yaContextCb.push(() => {
+				Ya.Context.AdvManager.render({
+					blockId: "R-A-7019864-4",
+					type: "rewarded",
+					platform: "desktop",
+					onRewarded: (isRewarded) => {
+						if (isRewarded) {
+							getHint();
+						} else {
+							modalHint.close();
+						}
+					}
+				})
+			})
+		})
 		btnPlay.forEach(btn => {
 			btn.addEventListener('click', () => {
 				showScreen('game-screen');
@@ -143,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				initEvents();
 				initScore();
 
-				counter = new CountUp(scoreBlock, scoreBlock.innerHTML, {separator: ' ',});
+				counter = new CountUp(scoreBlock, scoreBlock.innerHTML, {separator: '',});
 				if (!counter.error) {
 					counter.start();
 				}
@@ -168,8 +195,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
+	function getHint() {
+		if (hasHint()) {
+			let hintLetterCell = document.querySelector('.cell[data-coords="' + wordsInGameCoords[0].coords[hintCounter] + '"]');
+			hintLetterCell.classList.add('hinted');
+			hintCounter++;
+			resetHint();
+		}
+	}
+
 	function getWords(lang) {
 		return lang === 'rus' ? WORDS_RUS : WORDS_ENG
+	}
+
+	// проверяет остались ли буквы для подсказки
+	function hasHint() {
+		return wordsInGameCoords[0].coords[hintCounter].length
 	}
 
 	function showScreen(screen) {
@@ -241,7 +282,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	function fillGrid(scheme) {
 		scheme.forEach(coords => {
 			let countLetters = coords.length;
-			wordsInGame.push(getWordByLength(countLetters));
+			let word = getWordByLength(countLetters)
+			wordsInGame.push(word);
 		});
 
 		scheme.forEach((coords, i) => {
@@ -249,10 +291,16 @@ document.addEventListener('DOMContentLoaded', () => {
 			let word = wordsInGame[i];
 
 			if (word) {
+				let coordsOfWord = [];
 				[...word.name].forEach((letter, j) => {
 					let cell = document.querySelector('.cell[data-coords="' + coords[j] + '"]');
 					cell.innerHTML = letter;
+					coordsOfWord.push(coords[j]);
 				})
+				wordsInGameCoords.push({
+					word: word.name,
+					coords: coordsOfWord
+				});
 			} else {
 				console.error('Не найдено подходящих слов')
 			}
@@ -364,11 +412,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			counter.update(+scoreBlock.innerHTML.replace(/\D/, '') + word.length);
 			localStorage.setItem('fillwords_score', +scoreBlock.innerHTML.replace(/\D/, '') + word.length);
 			foundedWords.push(word);
+			hintCounter = 0; // сброс счетчика подсказанных букв
 
 			selectingWord.forEach((coords, i) => {
 				let cell = document.querySelector('.cell[data-coords="' + coords + '"]');
 				cell.classList.add('correct');
 				cell.classList.remove('selected');
+				cell.classList.remove('hinted');
 				cell.style.backgroundColor = _hex2rgba(colorWord);
 				cell.setAttribute('data-word', word);
 
@@ -384,6 +434,11 @@ document.addEventListener('DOMContentLoaded', () => {
 					modalDesc.showModal();
 				})
 			})
+
+			// удаляем слово из массива координат для подсказок
+			wordsInGameCoords = wordsInGameCoords.filter(wordInGame => wordInGame.word !== word)
+
+			resetHint(); // сбрасываем количество попыток и возвращаем кнопку подсказки
 
 			if (selectingWord.length > 1) {
 				inputedWord.classList.add('inputed-word-correct');
@@ -429,6 +484,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		else {
 			if (selectingWord.length > 1) {
 				inputedWord.classList.add('inputed-word-incorrect');
+				triesCounter++;
+				if (triesCounter >= 3 && hasHint()) {
+					btnHintModal.classList.remove('_hidden');
+				}
 				window.ym(96564571,'reachGoal', 'newWord',{newWord: getWordByCoords(selectingWord)})
 				setTimeout(() => {
 					clearInputedWord();
@@ -438,6 +497,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		selectingWord = [];
 		// lastSelectedWord = [];
+	}
+
+	function resetHint() {
+		triesCounter = 0;
+		btnHintModal.classList.add('_hidden');
 	}
 
 	function clearInputedWord() {
