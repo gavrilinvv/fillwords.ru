@@ -141,20 +141,37 @@ document.addEventListener('DOMContentLoaded', () => {
 			modalHint.showModal();
 		})
 		btnGetHint.addEventListener('click', () => {
-			window.yaContextCb.push(() => {
-				Ya.Context.AdvManager.render({
-					blockId: "R-A-7019864-4",
-					type: "rewarded",
-					platform: "desktop",
-					onRewarded: (isRewarded) => {
-						if (isRewarded) {
-							getHint();
-						} else {
-							modalHint.close();
+			if (Ya.Context.AdvManager.getPlatform() === 'desktop') {
+				window.yaContextCb.push(() => {
+					Ya.Context.AdvManager.render({
+						blockId: "R-A-7019864-4",
+						type: "rewarded",
+						platform: "desktop",
+						onRewarded: (isRewarded) => {
+							if (isRewarded) {
+								getHint();
+							} else {
+								modalHint.close();
+							}
 						}
-					}
+					})
 				})
-			})
+			} else {
+				window.yaContextCb.push(() => {
+					Ya.Context.AdvManager.render({
+						blockId: "R-A-7019864-5",
+						type: "rewarded",
+						platform: "touch",
+						onRewarded: (isRewarded) => {
+							if (isRewarded) {
+								getHint();
+							} else {
+								modalHint.close();
+							}
+						}
+					})
+				})
+			}
 		})
 		btnPlay.forEach(btn => {
 			btn.addEventListener('click', () => {
