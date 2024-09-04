@@ -11,19 +11,21 @@
 		<div class="score">0</div>
 
 		<dialog id="modal-unkown-word">
-			Не знаю такого слова
+			<div>Не знаю такого слова</div>
 			<form method="dialog">
 				<button>Понятно</button>
 			</form>
 		</dialog>
 
-		<dialog id="modal-other-path">Соберите слово по-другому
+		<dialog id="modal-other-path">
+			<div>Соберите слово по-другому</div>
 			<form method="dialog">
 				<button>Понятно</button>
 			</form>
 		</dialog>
 
-		<dialog id="modal-found-bonus">Бонусное слово уже найдено
+		<dialog id="modal-found-bonus">
+			<div>Бонусное слово уже найдено</div>
 			<form method="dialog">
 				<button>Понятно</button>
 			</form>
@@ -37,14 +39,16 @@
 			</form>
 		</dialog>
 
-		<dialog id="modal-win">Победа!
+		<dialog id="modal-win">
+			<div>Победа!</div>
 			<form method="dialog">
 				<button class="js-next-level-modal">Новый уровень</button>
 				<button class="js-show-field">Посмотреть поле</button>
 			</form>
 		</dialog>
 
-		<dialog id="modal-hint">Получить подсказку после просмотра короткой рекламы?
+		<dialog id="modal-hint">
+			<div>Получить подсказку после просмотра короткой рекламы?</div>
 			<form method="dialog">
 				<button class="js-get-hint">Да</button>
 				<button class="js-show-field">Нет</button>

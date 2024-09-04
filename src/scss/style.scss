@@ -577,6 +577,11 @@ dialog[open] {
 		background: rgba(0, 0, 0, 0.5);
 	}
 
+	& div {
+		margin: auto;
+		text-align: center;
+	}
+
 	& a {
 		color: #000;
 		text-decoration: underline;
