@@ -57,6 +57,7 @@
 </head>
 <body>
 	<div id="app">
+		<div class="modal-bg"></div>
 		<div class="banner banner-bottom">
 			<div id="yandex_rtb_R-A-7019864-3"></div>
 		</div>

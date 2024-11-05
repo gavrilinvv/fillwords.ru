@@ -10,28 +10,61 @@
 
 		<div class="score">0</div>
 
-		<dialog id="modal-unkown-word">
+		<div id="modal-unkown-word" class="modal">
+			<div>Не знаю такого слова</div>
+			<button class="modal-close">Понятно</button>
+		</div>
+
+		<div id="modal-other-path" class="modal">
+			<div>Соберите слово по-другому</div>
+			<button class="modal-close">Понятно</button>
+		</div>
+
+		<div id="modal-found-bonus" class="modal">
+			<div>Бонусное слово уже найдено</div>
+			<button class="modal-close">Понятно</button>
+		</div>
+
+		<div id="modal-word-desc" class="modal">
+			<div class="modal-word">Слово</div>
+			<div class="modal-desc">Описание</div>
+			<button class="modal-close">Понятно</button>
+		</div>
+
+		<div id="modal-win" class="modal">
+			<div>Победа!</div>
+			<button class="js-next-level-modal">Новый уровень</button>
+			<button class="js-show-field">Посмотреть поле</button>
+		</div>
+
+		<div id="modal-hint" class="modal">
+			<div>Получить подсказку после просмотра короткой рекламы?</div>
+			<button class="js-get-hint">Да</button>
+			<button class="js-show-field">Нет</button>
+		</div>
+
+		<!-- <dialog id="modal-unkown-word">
 			<div>Не знаю такого слова</div>
 			<form method="dialog">
 				<button>Понятно</button>
 			</form>
-		</dialog>
+		</dialog> -->
 
-		<dialog id="modal-other-path">
+		<!-- <dialog id="modal-other-path">
 			<div>Соберите слово по-другому</div>
 			<form method="dialog">
 				<button>Понятно</button>
 			</form>
-		</dialog>
+		</dialog> -->
 
-		<dialog id="modal-found-bonus">
+		<!-- <dialog id="modal-found-bonus">
 			<div>Бонусное слово уже найдено</div>
 			<form method="dialog">
 				<button>Понятно</button>
 			</form>
-		</dialog>
+		</dialog> -->
 
-		<dialog id="modal-word-desc">
+		<!-- <dialog id="modal-word-desc">
 			<div class="modal-word">Слово</div>
 			<div class="modal-desc">Описание</div>
 			<form method="dialog">
@@ -53,7 +86,7 @@
 				<button class="js-get-hint">Да</button>
 				<button class="js-show-field">Нет</button>
 			</form>
-		</dialog>
+		</dialog> -->
 
 		<!-- <div class="area-table">
 			<div class="area-table__title">Слова</div>

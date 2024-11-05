@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	const scoreBlock = document.querySelector('.score');
 	const notice = document.querySelector('.notice');
 
+	const modals = document.querySelectorAll(".modal");
+	const modalBg = document.querySelector(".modal-bg");
+	const modalBtnClose = document.querySelectorAll('.modal-close');
 	const modalUnknownWord = document.getElementById("modal-unkown-word");
 	const modalOtherPath = document.getElementById("modal-other-path");
 	const modalWin = document.getElementById("modal-win");
@@ -61,6 +64,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	initTitleAnimate();
 	console.log(checkDuplicates());
 
+	function openModal(modal) {
+		modalBg.classList.add('modal-bg_open');
+		modal.classList.add('modal_open');
+	}
+	function closeModal() {
+		modalBg.classList.remove('modal-bg_open');
+		modals.forEach(modal => {
+			modal.classList.remove('modal_open');
+		})
+	}
+
 	function checkDuplicates() {
 		let WORDS = WORDS_RUS.concat(WORDS_ENG);
 		const lookup = WORDS.reduce((a, e) => {
@@ -84,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		foundedWords = [];
 		foundedBonusWords = [];
 
-		modalDesc.close();
+		closeModal();
 	}
 
 	// удаление элемента массива по названию
@@ -131,14 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		btnShowField.forEach(btn => {
 			btn.addEventListener('click', () => {
 				btnNextLevel.forEach(btn => btn.classList.remove('_hidden'))
-				modalWin.close();
+				closeModal();
 			})
 		})
 		btnAbout.addEventListener('click', () => {
 			showScreen('about-screen');
 		})
 		btnHintModal.addEventListener('click', () => {
-			modalHint.showModal();
+			// modalHint.showModal();
+			openModal(modalHint);
 		})
 		btnGetHint.addEventListener('click', () => {
 			if (Ya.Context.AdvManager.getPlatform() === 'desktop') {
@@ -151,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							if (isRewarded) {
 								getHint();
 							} else {
-								modalHint.close();
+								closeModal();
 							}
 						}
 					})
@@ -166,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							if (isRewarded) {
 								getHint();
 							} else {
-								modalHint.close();
+								closeModal();
 							}
 						}
 					})
@@ -196,6 +211,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		btnBack.forEach(btn => {
 			btn.addEventListener('click', () => {
 				showScreen('start-screen');
+			})
+		})
+
+		modalBtnClose.forEach(btn => {
+			btn.addEventListener('click', () => {
+				closeModal()
 			})
 		})
 
@@ -347,7 +368,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (![...cells].filter(cell => !cell.classList.contains('correct')).length) {
 			btnNextLevelModal.forEach(btn => btn.classList.remove('_hidden'));
 			btnNextLevel.forEach(btn => btn.classList.add('_hidden'));
-			modalWin.showModal();
+			// modalWin.showModal();
+			openModal(modalWin);
 
 			return;
 		}
@@ -409,13 +431,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// бонусное слово уже найдено
 		if (foundedBonusWords.includes(word)) {
-			modalFoundBonus.showModal();
+			// modalFoundBonus.showModal();
+			openModal(modalFoundBonus)
 			return;
 		}
 
 		// не знаю такого слова
 		if (selectingWord.length && (getWordByCoords(lastSelectedWord) === word) && !wordsInGame.map(word => word.name).includes(getWordByCoords(selectingWord))) {
-			modalUnknownWord.showModal();
+			// modalUnknownWord.showModal();
+			openModal(modalUnknownWord);
 		}
 		lastSelectedWord = selectingWord;
 
@@ -448,7 +472,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					wordModal.innerHTML = capitalizeFirstLetter(findWord);
 					descModal.innerHTML = WORDS.find(word => word.name === findWord).desc;
 
-					modalDesc.showModal();
+					// modalDesc.showModal();
+					openModal(modalDesc);
 				})
 			})
 
@@ -496,7 +521,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			setTimeout(() => {
 				clearInputedWord();
 			}, 2000)
-			modalOtherPath.showModal();
+			// modalOtherPath.showModal();
+			openModal(modalOtherPath);
 		}
 		else {
 			if (selectingWord.length > 1) {

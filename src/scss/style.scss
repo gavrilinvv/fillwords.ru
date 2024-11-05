@@ -625,6 +625,78 @@ dialog[open] {
 	text-align: center;
 }
 
+.modal-bg {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+
+	&_open {
+		display: block;
+		z-index: 2;
+	}
+}
+
+.modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+	background: #fff;
+	@include fluid('padding-bottom', 24px);
+	@include fluid('padding-top', 24px);
+	@include fluid('padding-left', 24px);
+	@include fluid('padding-right', 24px);
+	@include fluid('border-radius', 6px);
+	border: none;
+	@include fluid('width', 320px);
+	@include fluid('font-size', 22px);
+	flex-direction: column;
+
+	@include mobile {
+		width: 80%;
+	}
+
+	& div {
+		margin: auto;
+		text-align: center;
+	}
+
+	&_open {
+		display: flex;
+		z-index: 3;
+	}
+
+	& button {
+		outline: none;
+		border: none;
+		cursor: pointer;
+		background-color: #121212;
+		color: #fff;
+		width: 100%;
+		@include fluid('padding-left', 12px);
+		@include fluid('padding-right', 12px);
+		@include fluid('padding-top', 12px);
+		@include fluid('padding-bottom', 12px);
+		@include fluid('border-radius', 6px);
+		@include fluid('margin-top', 12px);
+		@include fluid('font-size', 18px);
+		transition: .2s;
+
+		&:hover {
+			background-color: lighten(#121212, 5%);
+			transition: .2s;
+		}
+
+		&:active {
+			background-color: darken(rgba(240, 240, 240), 10%);
+			transition: .2s;
+		}
+	}
+}
+
 .main-title {
 	font-family: 'Comfortaa';
 	cursor: default;
