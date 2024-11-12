@@ -239,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			hintLetterCell.classList.add('hinted');
 			hintCounter++;
 			resetHint();
+			closeModal();
 		}
 	}
 

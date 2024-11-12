@@ -64,7 +64,7 @@
 		<div class="banner banner-left">
 			<div id="yandex_rtb_R-A-7019864-1"></div>
 		</div>
-		<?include('screens/dots.php');?>
+		<?//include('screens/dots.php');?>
 		<?include('screens/start.php');?>
 		<?include('screens/about.php');?>
 		<?//include('screens/levels.php');?>

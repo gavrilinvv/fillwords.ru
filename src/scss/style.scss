@@ -90,8 +90,9 @@ body {
 
 #app {
 	// background: radial-gradient(circle at center, #000000 0, #242424, #000000 100%);
-	background-image: url('/src/img/bg8_.jpg');
-    background-size: cover;
+	// background-image: url('/src/img/bg8_.jpg');
+    // background-size: cover;
+	background-color: #000;
 	display: flex;
     justify-content: center;
     align-items: center;
@@ -782,51 +783,6 @@ dialog[open] {
 	}
 }
 
-.bg-fluid {
-	z-index: 0;
-	overflow: hidden;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-
-	.dotWrapper {
-		position: absolute;
-
-		@for $i from 1 through 75 {
-			&-#{$i} {
-				top: random(100) * 1%;
-				left: random(100) * 1%;
-				animation: flying (random(50)+20)+s ease-in-out math.div(random(100), -10)+s infinite alternate;
-			}
-		}
-	}
-
-	.dot {
-		// width: 12px;
-		// height: 12px;
-		filter: blur(1px);
-		background: rgba(255, 255, 255, 0.3);
-		border-radius: 50%;
-
-		@for $i from 1 through 50 {
-			$size: (random(60)-15);
-			&-#{$i} {
-				width: $size+px;
-				height: $size+px;
-				transform-origin: (random(30)-15)+px (random(30)-15)+px;
-				animation: rotating (random(20)+10)+s ease-in-out math.div(random(100), -10)+s infinite;
-			}
-		}
-
-		@include mobile {
-			background: rgba(255, 255, 255, 0.3);
-		}
-	}
-}
-
 @keyframes rotating {
 	0% {
 		opacity: 0;
@@ -909,3 +865,46 @@ dialog[open] {
 	@include fluid('margin-top', 12px);
 	color: #000;
 }
+
+// .bg-fluid {
+// 	z-index: 0;
+// 	overflow: hidden;
+// 	height: 100%;
+// 	position: absolute;
+// 	top: 0;
+// 	left: 0;
+// 	right: 0;
+// 	bottom: 0;
+
+// 	.dotWrapper {
+// 		position: absolute;
+
+// 		@for $i from 1 through 75 {
+// 			&-#{$i} {
+// 				top: random(100) * 1%;
+// 				left: random(100) * 1%;
+// 				animation: flying (random(50)+20)+s ease-in-out math.div(random(100), -10)+s infinite alternate;
+// 			}
+// 		}
+// 	}
+
+// 	.dot {
+// 		filter: blur(1px);
+// 		background: rgba(255, 255, 255, 0.3);
+// 		border-radius: 50%;
+
+// 		@for $i from 1 through 50 {
+// 			$size: (random(60)-15);
+// 			&-#{$i} {
+// 				width: $size+px;
+// 				height: $size+px;
+// 				transform-origin: (random(30)-15)+px (random(30)-15)+px;
+// 				animation: rotating (random(20)+10)+s ease-in-out math.div(random(100), -10)+s infinite;
+// 			}
+// 		}
+
+// 		@include mobile {
+// 			background: rgba(255, 255, 255, 0.3);
+// 		}
+// 	}
+// }
