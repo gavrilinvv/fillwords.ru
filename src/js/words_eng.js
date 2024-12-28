@@ -75,6 +75,8 @@ export const WORDS_ENG = [
 	{name: 'rope', desc: 'Strong, thick string made of long twisted threads'},
 	{name: 'pipe', desc: 'A tube inside which liquid or gas flows from one place to another'},
 	{name: 'boat', desc: 'A small vehicle for travelling on water'},
+	{name: 'lord', desc: 'A man who has a lot of power in a particular area of activity'},
+	{name: 'tour', desc: 'A visit to a place or area, especially one during which you look around the place or area and learn about it'},
 
 	// 5
 	{name: 'light', desc: 'The brightness that comes from the sun, fire, etc. and from electrical devices'},
@@ -103,6 +105,9 @@ export const WORDS_ENG = [
 	{name: 'space', desc: "The empty area outside Earth's atmosphere, where the planets and the stars are"},
 	{name: 'swamp', desc: 'Very wet, soft land'},
 	{name: 'shape', desc: 'The particular physical form or appearance of something'},
+	{name: 'judge', desc: 'A person who is in charge of a trial in a court and decides how a person who is guilty of a crime should be punished, or who makes decisions on legal matters'},
+	{name: 'plant', desc: 'A living thing that grows in earth, in water, or on other plants, usually has a stem, leaves, roots, and flowers, and produces seeds'},
+	{name: 'arrow', desc: 'A sign consisting of a straight line with an upside down V shape at one end of it that points in a particular direction, used to show where something is'},
 
 	// 6
 	{name: 'forest', desc: 'A large area of land covered with trees and plants, usually larger than a wood, or the trees and plants themselves'},
@@ -120,6 +125,8 @@ export const WORDS_ENG = [
 	{name: 'health', desc: 'The condition of the body and the degree to which it is free from illness, or the state of being well'},
 	{name: 'lizard', desc: 'A small reptile that has a long body, four short legs, a long tail, and thick skin'},
 	{name: 'shadow', desc: 'An area of darkness, caused by light being blocked by something'},
+	{name: 'poison', desc: 'A substance that can make people or animals ill or kill them if they eat or drink it'},
+	{name: 'cheese', desc: 'A food made from milk, or from a milk-like substance taken from plants, that can be either firm or soft and is usually yellow or white in colour'},
 
 	// 7
 	{name: 'printer', desc: 'A machine that is connected to a computer and prints onto paper using ink'},
@@ -127,11 +134,13 @@ export const WORDS_ENG = [
 	{name: 'cartoon', desc: 'A drawing, especially in a newspaper or magazine, that tells a joke or makes a humorous political criticism'},
 	{name: 'cabbage', desc: 'A large, round vegetable with large green, white, or purple leaves that can be eaten cooked or uncooked'},
 	{name: 'pumpkin', desc: 'A large, round vegetable with hard, yellow or orange flesh'},
-	{name: 'hamster', desc: 'A small animal covered in fur with a short tail and large spaces in each side of its mouth for storing food. Hamsters are often kept as pets.'},
+	{name: 'hamster', desc: 'A small animal covered in fur with a short tail and large spaces in each side of its mouth for storing food. Hamsters are often kept as pets'},
 	{name: 'sparrow', desc: 'A small, grey-brown bird that is especially common in towns'},
 	{name: 'journey', desc: 'The act of travelling from one place to another, especially in a vehicle'},
 	{name: 'library', desc: 'A building, room, or organization that has a collection of books, documents, music, and sometimes things such as tools or artwork, for people to borrow, usually without payment'},
 	{name: 'weather', desc: 'The conditions in the air above the earth such as wind, rain, or temperature, especially at a particular time over a particular area'},
+	{name: 'miracle', desc: 'An unusual and mysterious event that is thought to have been caused by a god because it does not follow the usual laws of nature'},
+	{name: 'brother', desc: 'A man or boy with the same parents as another person'},
 
 	// 8
 	{name: 'notebook', desc: 'A book of plain paper or paper with lines, for writing on'},
@@ -144,6 +153,7 @@ export const WORDS_ENG = [
 	{name: 'entrance', desc: 'A door, gate, etc. by which you can enter a building or place'},
 	{name: 'ellipsis', desc: 'Three dots in a printed text that show where one or more words have been intentionally left out'},
 	{name: 'hospital', desc: 'A place where people who are ill or injured are treated and taken care of by doctors and nurses'},
+	{name: 'porridge', desc: 'A thick, soft food made from oats boiled in milk or water, eaten hot for breakfast'},
 
 	// 9
 	{name: 'judgement', desc: ''},
